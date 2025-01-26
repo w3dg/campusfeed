@@ -1,9 +1,7 @@
-import Image from "next/image";
-
-export default function Home() {
+export default function Landing() {
   return (
     <div>
-      CAMPUS FEED
+      Campus Feed Landing Page
     </div>
   );
 }
