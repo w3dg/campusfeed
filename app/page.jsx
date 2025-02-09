@@ -1,9 +1,9 @@
-import { Button } from "@heroui/react";
+import { Button } from '@heroui/react'
 
 export default function Landing() {
   return (
     <div>
-      <Button className="border-black border rounded bg-yellow-400">Hello World</Button>
+      <h1>Landing Page</h1>
     </div>
-  );
+  )
 }
