@@ -1,7 +1,13 @@
 import React from 'react'
+import NavBar from '../fragments/NavBar'
 
 const HeroSection = () => {
-  return <div>HeroSection</div>
+  return (
+    <>
+      <NavBar />
+      HeroSection
+    </>
+  )
 }
 
 export default HeroSection
