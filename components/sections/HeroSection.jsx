@@ -11,7 +11,12 @@ const HeroSection = () => {
           background: 'linear-gradient(to bottom, #FCFDFD, #D3DEE3 100%)',
         }}
       >
-        <h1>Hello World</h1>
+        <h1 className="text-[40px] leading-[50px] lg:text-[72px] lg:w-[40%] lg:mx-auto lg:leading-[80px]">
+          All the <span className="text-[#6DA27D]">Events</span> in One Place
+        </h1>
+        <p className="mt-5 text-xs md:text-sm lg:text-[18px] lg:mt-8">
+          More description about Campus Feed
+        </p>
       </section>
     </>
   )
