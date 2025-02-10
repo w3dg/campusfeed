@@ -76,9 +76,8 @@ const HamburgerMenu = ({ navLinks }) => {
               {navLinks.map((item) => (
                 <a
                   key={item}
-                  href="#"
                   className="px-4 py-1 hover:bg-gray-100 rounded-md transition-colors duration-200"
-                  onClick={toggleMenu}
+                  href={`#${item.toLowerCase()}`}
                 >
                   {item}
                 </a>
