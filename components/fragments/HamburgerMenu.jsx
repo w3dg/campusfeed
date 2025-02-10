@@ -4,12 +4,12 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
+const navLinks = ['Home', 'Events', 'About', 'Contact Us']
+
 const HamburgerMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
   return (
     <div className="relative md:hidden">
@@ -35,6 +35,7 @@ const HamburgerMenu = () => {
                 width={30}
                 height={30}
                 alt="Close Menu"
+                className="filter-green"
               />
             </motion.div>
           ) : (
@@ -59,19 +60,14 @@ const HamburgerMenu = () => {
 
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
-            className="fixed inset-0 bg-black/20 z-40"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={toggleMenu}
-          />
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {isMenuOpen && (
           <>
+            <motion.div
+              className="fixed inset-0 bg-black/20 z-40"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={toggleMenu}
+            />
             <motion.nav
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -79,7 +75,7 @@ const HamburgerMenu = () => {
               transition={{ duration: 0.2, ease: 'easeInOut' }}
               className="absolute top-12 right-0 bg-white shadow-lg rounded-lg p-4 w-48 flex flex-col z-50 gap-1"
             >
-              {['Home', 'Events', 'About', 'Contact Us'].map((item) => (
+              {navLinks.map((item) => (
                 <a
                   key={item}
                   href="#"
