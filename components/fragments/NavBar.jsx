@@ -28,7 +28,7 @@ const NavBar = () => {
       <button className="bg-[#6DA27D] ml-4 rounded-lg py-2 px-4 text-white hover:scale-105 hover:shadow-lg transition-all duration-200 hidden md:block">
         Register
       </button>
-      <HamburgerMenu />
+      <HamburgerMenu navLinks={navLinks} />
     </nav>
   )
 }

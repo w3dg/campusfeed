@@ -4,9 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
-const navLinks = ['Home', 'Events', 'About', 'Contact Us']
-
-const HamburgerMenu = () => {
+const HamburgerMenu = ({ navLinks }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
