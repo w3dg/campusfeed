@@ -1,6 +1,12 @@
 import Image from "next/image";
 import EventCard from "./EventCard";
 
+const EventImagesArray = [
+  "/EventDemo.svg",
+  "/EventDemo2.svg",
+  "/EventDemo3.svg",
+];
+
 const SearchBarSection = () => {
   return (
     <>
@@ -24,9 +30,9 @@ const SearchBarSection = () => {
           </div>
         </div>
         <div className="grid grid-cols-3 gap-3 mt-3 h-[70%] md:mt-5">
-          <EventCard/>
-          <EventCard/>
-          <EventCard/>
+          {EventImagesArray.map((item,index) => (
+            <EventCard item={item} key={index}/>
+          ))}
         </div>
       </div>
     </>
