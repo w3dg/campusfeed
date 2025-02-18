@@ -3,6 +3,30 @@
 import Image from "next/image";
 import { useState } from "react";
 
+export function FeatureCard({id, title, description, icon}) {
+  return (
+    <div className="rounded-2xl py-8 px-10 bg-background w-full min-h-fit flex flex-col border-black border-2 items-start justify-between">
+      <h1 className="text-3xl font-bold">{title}</h1>
+      <p className="text-left mt-10 text-xl font-thin text-gray-700">
+        {description}
+      </p>
+      <div className="mt-20 flex items-center justify-between w-full">
+        <Image
+          src={icon}
+          height={60}
+          width={60}
+          alt="icon"
+          className="object-contain shrink-0 p-3 bg-[#8690b1] shadow-inner rounded-2xl mb-4 fill-white"
+        />
+        <span className="font-bold">
+          FEATURE {id}
+        </span>
+      </div>
+    </div>
+  )
+}
+
+
 export default function Features() {
   const [features] = useState([
     {
@@ -28,7 +52,7 @@ export default function Features() {
   return (
     <section
       id="features"
-      className="relative isolate overflow-hidden px-6 lg:px-8"
+      className="relative isolate overflow-hidden px-6 lg:px-16"
     >
       <div
         aria-hidden="true"
@@ -39,12 +63,12 @@ export default function Features() {
           alt="ellipse"
           width={1440}
           height={578}
-          className="relative opacity-50 right-[calc(50%-11rem)] aspect-square w-[36.125rem] translate-x-1/2 sm:right-[calc(50%-45rem)] sm:w-[60.1875rem] "
+          className="relative opacity-50 right-[calc(50%-11rem)] aspect-square w-[36.125rem] translate-x-[100%] sm:right-[calc(50%-45rem)] sm:w-[60.1875rem] "
         />
       </div>
       <div className="py-24 sm:py-32">
         <div className="mx-auto max-w-2xl text-center">
-          <h6 className="text-base/normal font-sans mb-2 hidden md:block font-normal text-slate-600 uppercase">
+           <h6 className="text-base/normal font-sans mb-2 hidden md:block font-normal text-slate-600 uppercase">
             What sets us apart
           </h6>
           <h1 className="text-5xl font-semibold font-sans text-pretty">
@@ -57,22 +81,7 @@ export default function Features() {
         <div className="mt-6 flex flex-col items-center justify-center min-h-[50vh] py-2">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:grid-cols-3">
             {features.map((feature, index) => (
-              <div
-                key={index}
-                className="rounded-2xl shadow-xl p-8 bg-background text-center"
-              >
-                <Image
-                  src={feature.icon}
-                  height={50}
-                  width={50}
-                  alt="icon"
-                  className="object-contain shrink-0 p-3 bg-[#8690b1] shadow-inner rounded-2xl mx-auto mb-4 fill-white"
-                />
-                <h2 className="text-2xl font-bold mb-4">{feature.title}</h2>
-                <p className="text-gray-700 text-base text-left">
-                  {feature.description}
-                </p>
-              </div>
+              <FeatureCard key={index} id={index + 1} {...feature} />
             ))}
           </div>
         </div>
