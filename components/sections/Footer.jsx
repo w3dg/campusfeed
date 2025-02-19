@@ -109,7 +109,7 @@ export default function Footer() {
       </div>
 
       {/* Horizontal Line */}
-      <div className="border-t-2 border-[#6DA27D] my-6"/>
+      <div className="my-6 border-0 md:border-t-2 md:border-[#6DA27D]"/>
 
       {/* Copyright Section */}
       <div className="text-center">
