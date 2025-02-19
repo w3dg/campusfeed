@@ -9,7 +9,7 @@ export default function FooterSection() {
   return (
     <footer className="w-full bg-white border-t-2 border-[#6DA27D]">
       {/* Desktop View */}
-      <div className="hidden md:block max-w-7xl mx-auto px-8 py-12">
+      <div className="hidden md:block max-w-7xl mx-auto px-16 py-8">
         <div className="flex justify-between items-start">
           {/* Left: Logo Section */}
           <div className="flex items-center space-x-6">
