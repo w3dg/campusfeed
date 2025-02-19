@@ -51,24 +51,35 @@ export default function Home() {
                 />
               </motion.div>
             ) : (
-              <motion.div
-                className="flex gap-1 items-center bg-[#D3DEE3] pl-1 py-1 rounded-md max-w-fit"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <Image
-                  src={'/SearchIcon.svg'}
-                  height={20}
-                  width={20}
-                  alt="search"
-                  onClick={() => setSearch(!search)}
-                />
-                <input
-                  placeholder="Search for something.."
+              <motion.div className="relative md:hidden">
+                <motion.input
+                  initial={{ width: 0, opacity: 0 }}
+                  animate={{ width: 'auto', opacity: 1 }}
+                  exit={{ width: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  placeholder="Search "
                   type="text"
-                  className="bg-transparent rounded-md placeholder:text-black/45 placeholder:text-sm placeholder:font-light focus:outline-none"
+                  className="bg-[#D3DEE3] py-1 pl-3 pr-8 rounded-2xl placeholder:text-black/45 placeholder:text-sm placeholder:font-light focus:outline-none"
                 />
+                <button
+                  onClick={() => setSearch(false)}
+                  className="absolute right-2 top-1/2 -translate-y-1/2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
               </motion.div>
             )}
           </AnimatePresence>
