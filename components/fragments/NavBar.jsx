@@ -18,7 +18,7 @@ const NavBar = () => {
         {navLinks.map((item) => (
           <a
             key={item}
-            href={`#${item.toLowerCase()}`}
+            href={`/${item.toLowerCase()}`}
             className="py-1 px-2 hover:bg-[#ABBEC9] hover:bg-opacity-90 rounded-md transition-colors duration-200"
           >
             {item}
