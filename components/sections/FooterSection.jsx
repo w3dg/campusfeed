@@ -87,10 +87,10 @@ export default function FooterSection() {
         {/* Navigation Links */}
         <nav className="mt-8">
           <ul className="flex flex-wrap justify-center gap-6">
-            <li><a href="/" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>Home</a></li>
-            <li><a href="/about" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>About Us</a></li>
-            <li><a href="/events" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>Events</a></li>
-            <li><a href="/contact" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>Contact Us</a>
+            <li><a href="/" className={`nav-link ${dmSans.className} ${dmSans.className}`}>Home</a></li>
+            <li><a href="/about" className={`nav-link ${dmSans.className} ${dmSans.className}`}>About Us</a></li>
+            <li><a href="/events" className={`nav-link ${dmSans.className} ${dmSans.className}`}>Events</a></li>
+            <li><a href="/contact" className={`nav-link ${dmSans.className} ${dmSans.className}`}>Contact Us</a>
             </li>
           </ul>
         </nav>
