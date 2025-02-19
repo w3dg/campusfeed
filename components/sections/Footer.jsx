@@ -8,7 +8,7 @@ const dmSans = DM_Sans({
 export default function Footer() {
   const navLinks = [
     {href: "/", label: "Home"},
-    {href: "/about", label: "About Us"},
+    {href: "/about", label: "About"},
     {href: "/events", label: "Events"},
     {href: "/contact", label: "Contact Us"},
   ];
