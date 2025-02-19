@@ -108,8 +108,8 @@ export default function Footer() {
         ))}
       </div>
 
-      {/* Horizontal Line */}
-      <div className="my-6 border-0 md:border-t-2 md:border-[#6DA27D]"/>
+      {/* Spacer */}
+      <div className="my-6 border-0 md:border-t-2"/>
 
       {/* Copyright Section */}
       <div className="text-center">
@@ -122,7 +122,7 @@ export default function Footer() {
 
 
   return (
-    <footer className="w-full bg-white border-t-2 border-[#6DA27D]">
+    <footer className="w-full bg-white border-[#6DA27D] border-t-0 md:border-t-2">
       <DesktopFooter/>
       <MobileFooter/>
     </footer>
