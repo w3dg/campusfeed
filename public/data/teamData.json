@@ -2,21 +2,21 @@
   {
     "id": 1,
     "title": "John Doe",
-    "subtitle": "Backend Developer",
+    "subtitle": "Developer",
     "image": "https://static.remove.bg/sample-gallery/graphics/bird-thumbnail.jpg",
     "github": "https://github.com"
   },
   {
     "id": 2,
     "title": "Jane Smith",
-    "subtitle": "Frontend Developer",
+    "subtitle": "Developer",
     "image": "https://static.remove.bg/sample-gallery/graphics/bird-thumbnail.jpg",
     "github": "https://github.com"
   },
   {
     "id": 3,
     "title": "Alice Brown",
-    "subtitle": "Full Stack Developer",
+    "subtitle": "Developer",
     "image": "https://static.remove.bg/sample-gallery/graphics/bird-thumbnail.jpg",
     "github": "https://github.com"
   },
