@@ -5,7 +5,7 @@ const dmSans = DM_Sans({
   subsets: ["latin"],
 });
 
-export default function FooterSection() {
+export default function Footer() {
   return (
     <footer className="w-full bg-white border-t-2 border-[#6DA27D]">
       {/* Desktop View */}
@@ -38,22 +38,22 @@ export default function FooterSection() {
             </nav>
 
             {/* Social Media Icons */}
-            <div className="flex justify-end space-x-8">
-              <a href="#" className="text-gray-700 hover:text-gray-900">
+            <div className="flex justify-end space-x-4">
+              <a href="#" className="text-gray-500 hover:text-gray-900">
                 <img
                   src="/images/facebook.svg"
                   alt="Facebook"
                   className="w-6 h-6"
                 />
               </a>
-              <a href="#" className="text-gray-700 hover:text-gray-900">
+              <a href="#" className="text-gray-500 hover:text-gray-900">
                 <img
                   src="/images/instagram.svg"
                   alt="Instagram"
                   className="w-6 h-6"
                 />
               </a>
-              <a href="#" className="text-gray-700 hover:text-gray-900">
+              <a href="#" className="text-gray-500 hover:text-gray-900">
                 <img
                   src="/images/github.svg"
                   alt="Github"
@@ -69,7 +69,8 @@ export default function FooterSection() {
 
         {/* Copyright Section */}
         <div className="text-center">
-          <p className={`text-gray-600 text-sm ${dmSans.className}`}>© Copyright 2025, All Rights Reserved</p>
+          <p className={`text-sm ${dmSans.className}`} style={{color: '#52525B'}}>© Copyright 2025, All Rights
+            Reserved</p>
         </div>
       </div>
 
@@ -96,22 +97,22 @@ export default function FooterSection() {
         </nav>
 
         {/* Social Media Icons */}
-        <div className="flex justify-center space-x-2 mt-8">
-          <a href="#" className="text-gray-700 hover:text-gray-900">
+        <div className="flex justify-end space-x-8">
+          <a href="#" className="text-gray-500 hover:text-gray-900">
             <img
               src="/images/facebook.svg"
               alt="Facebook"
               className="w-6 h-6"
             />
           </a>
-          <a href="#" className="text-gray-700 hover:text-gray-900">
+          <a href="#" className="text-gray-500 hover:text-gray-900">
             <img
               src="/images/instagram.svg"
               alt="Instagram"
               className="w-6 h-6"
             />
           </a>
-          <a href="#" className="text-gray-700 hover:text-gray-900">
+          <a href="#" className="text-gray-500 hover:text-gray-900">
             <img
               src="/images/github.svg"
               alt="Github"
@@ -125,7 +126,8 @@ export default function FooterSection() {
 
         {/* Copyright Section */}
         <div className="text-center">
-          <p className={`text-gray-600 text-sm ${dmSans.className}`}>© Copyright 2025, All Rights Reserved</p>
+          <p className={`text-sm ${dmSans.className}`} style={{color: '#52525B'}}>© Copyright 2025, All Rights
+            Reserved</p>
         </div>
       </div>
     </footer>
