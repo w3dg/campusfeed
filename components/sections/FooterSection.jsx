@@ -1,106 +1,132 @@
+import { DM_Sans } from "next/font/google";
+
+const dmSans = DM_Sans({
+  style: "normal",
+  subsets: ["latin"],
+});
+
 export default function FooterSection() {
   return (
-    <footer className="bg-gray-50 border-t border-gray-200 py-6" style={{ borderTopColor: '#6DA27D' }}>
+    <footer className="w-full bg-white border-t-2 border-[#6DA27D]">
       {/* Desktop View */}
-      <div className="hidden md:flex justify-between items-center px-6 lg:px-12">
-        {/* Left Section: Logos */}
-        <div className="flex items-center space-x-6">
-          <img
-            src="images/konnexion_logo.svg"
-            alt="Konnexions Logo"
-            className="max-h-12"
-          />
-          <img
-            src="images/campus_feed_logo.svg"
-            alt="Campus Feed Logo"
-            className="max-h-5"
-          />
+      <div className="hidden md:block max-w-7xl mx-auto px-8 py-12">
+        <div className="flex justify-between items-start">
+          {/* Left: Logo Section */}
+          <div className="flex items-center space-x-6">
+            <img
+              src="/images/konnexion_logo.svg"
+              alt="Konnexions Logo"
+              className="h-12 object-contain"
+            />
+            <img
+              src="/images/campus_feed_logo.svg"
+              alt="Campus Feed Logo"
+              className="max-h-5"
+            />
+          </div>
+
+          {/* Right: Navigation and Social Links */}
+          <div className="flex flex-col space-y-8">
+            {/* Navigation Links */}
+            <nav>
+              <ul className="flex justify-end space-x-12">
+                <li><a href="/" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>Home</a></li>
+                <li><a href="/about" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>About Us</a></li>
+                <li><a href="/events" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>Events</a></li>
+                <li><a href="/contact" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>Contact Us</a></li>
+              </ul>
+            </nav>
+
+            {/* Social Media Icons */}
+            <div className="flex justify-end space-x-8">
+              <a href="#" className="text-gray-700 hover:text-gray-900">
+                <img
+                  src="/images/facebook.svg"
+                  alt="Facebook"
+                  className="w-6 h-6"
+                />
+              </a>
+              <a href="#" className="text-gray-700 hover:text-gray-900">
+                <img
+                  src="/images/instagram.svg"
+                  alt="Instagram"
+                  className="w-6 h-6"
+                />
+              </a>
+              <a href="#" className="text-gray-700 hover:text-gray-900">
+                <img
+                  src="/images/github.svg"
+                  alt="Github"
+                  className="w-6 h-6"
+                />
+              </a>
+            </div>
+          </div>
         </div>
 
+        {/* Horizontal Line */}
+        <div className="border-t-2 border-[#6DA27D] my-8"/>
 
-        <div className="flex space-x-12">
-          <ul className="flex space-x-6 text-gray-700">
-            <li>
-              <a href="#" className="hover:underline">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline">
-                About Us
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline">
-                Events
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:underline">
-                Contact Us
-              </a>
-            </li>
-          </ul>
-
-          <div className="flex space-x-4 text-gray-700">
-            <a href="#" className="hover:text-blue-500">
-              <i className="fab fa-facebook"></i>
-            </a>
-            <a href="#" className="hover:text-pink-500">
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a href="#" className="hover:text-gray-800">
-              <i className="fab fa-github"></i>
-            </a>
-          </div>
+        {/* Copyright Section */}
+        <div className="text-center">
+          <p className="text-gray-600 text-sm">© Copyright 2025, All Rights Reserved</p>
         </div>
       </div>
 
       {/* Mobile View */}
-      <div className="md:hidden flex flex-col items-center text-center space-y-4 px-6">
-        <img src="images/campus_feed_logo.svg" alt="Campus Feed Logo" className="h-10" />
+      <div className="md:hidden px-6 py-8">
+        {/* Logo Section */}
+        <div className="flex flex-col items-center space-y-6">
+          <img
+            src="/images/campus_feed_logo.svg"
+            alt="Campus Feed Logo"
+            className="max-h-8"
+          />
+        </div>
 
-        <ul className="flex space-x-6 text-gray-700">
-          <li>
-            <a href="#" className="hover:underline">
-              About
-            </a>
-          </li>
-          <li>
-            <a href="#" className="hover:underline">
-              Contact Us
-            </a>
-          </li>
-          <li>
-            <a href="#" className="hover:underline">
-              Features
-            </a>
-          </li>
-        </ul>
+        {/* Navigation Links */}
+        <nav className="mt-8">
+          <ul className="flex flex-wrap justify-center gap-6">
+            <li><a href="/" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>Home</a></li>
+            <li><a href="/about" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>About Us</a></li>
+            <li><a href="/events" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>Events</a></li>
+            <li><a href="/contact" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>Contact Us</a></li>
+          </ul>
+        </nav>
 
-        <div className="flex space-x-4 text-gray-700">
-          <a href="#" className="hover:text-blue-500">
-            <i className="fab fa-twitter"></i>
+        {/* Social Media Icons */}
+        <div className="flex justify-center space-x-8 mt-8">
+          <a href="#" className="text-gray-700 hover:text-gray-900">
+            <img
+              src="/images/facebook.svg"
+              alt="Facebook"
+              className="w-6 h-6"
+            />
           </a>
-          <a href="#" className="hover:text-blue-500">
-            <i className="fab fa-facebook"></i>
+          <a href="#" className="text-gray-700 hover:text-gray-900">
+            <img
+              src="/images/instagram.svg"
+              alt="Instagram"
+              className="w-6 h-6"
+            />
           </a>
-          <a href="#" className="hover:text-pink-500">
-            <i className="fab fa-instagram"></i>
-          </a>
-          <a href="#" className="hover:text-gray-800">
-            <i className="fab fa-github"></i>
+          <a href="#" className="text-gray-700 hover:text-gray-900">
+            <img
+              src="/images/github.svg"
+              alt="Github"
+              className="w-6 h-6"
+            />
           </a>
         </div>
+
+        {/* Horizontal Line */}
+        <div className="border-t-2 border-[#6DA27D] my-8"/>
+
+        {/* Copyright Section */}
+        <div className="text-center">
+          <p className="text-gray-600 text-sm">© Copyright 2025, All Rights Reserved</p>
+        </div>
       </div>
-
-      {/* Horizontal Line */}
-      <hr className="my-4 mx-10" style={{ borderColor: '#6DA27D' }} />
-
-      {/* Copyright Text */}
-      <p className="text-center text-sm text-gray-600">
-        © Copyright 2025, All Rights Reserved
-      </p>
     </footer>
   );
 }
