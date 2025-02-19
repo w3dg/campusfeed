@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 const EventCard = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col border-2 border-black">
       <Image
         src={'/EventDemo.svg'}
         alt="event"
@@ -21,7 +21,7 @@ const EventCard = () => {
           </p>
         </div>
         <div className="flex flex-col text-[12px] ">
-          <p className="font-medium line-clamp-1">
+          <p className="font-medium line-clamp-1 pr-3">
             KODESPHERE - The Flagship Event
           </p>
           <p className="font-medium">Campus 15</p>
