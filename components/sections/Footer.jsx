@@ -5,122 +5,99 @@ const dmSans = DM_Sans({
   subsets: ["latin"],
 });
 
-export default function Footer() {
-  const navLinks = [
-    {href: "/", label: "Home"},
-    {href: "/about", label: "About"},
-    {href: "/events", label: "Events"},
-    {href: "/contact", label: "Contact Us"},
-  ];
+const NAV_LINKS = [
+  {href: "/", label: "Home"},
+  {href: "/about", label: "About"},
+  {href: "/events", label: "Events"},
+  {href: "/contact", label: "Contact Us"},
+];
 
-  const socialLinks = [
-    {href: "#", src: "/images/facebook.svg", alt: "Facebook"},
-    {href: "#", src: "/images/instagram.svg", alt: "Instagram"},
-    {href: "#", src: "/images/github.svg", alt: "Github"},
-  ];
+const SOCIAL_LINKS = [
+  {href: "#", src: "/images/facebook.svg", alt: "Facebook"},
+  {href: "#", src: "/images/instagram.svg", alt: "Instagram"},
+  {href: "#", src: "/images/github.svg", alt: "Github"},
+];
 
-  const renderNavLinks = (ulClassName = "") => (
-    <nav>
-      <ul className={`${ulClassName} flex justify-end space-x-9`}>
-        {navLinks.map((link) => (
-          <li key={link.href}>
-            <a href={link.href} className={`nav-link ${dmSans.className}`}>
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-
-  const renderSocialLinks = (spacing = "space-x-4") => (
-    <div className={`flex justify-end ${spacing}`}>
-      {socialLinks.map((link) => (
-        <a key={link.alt} href={link.href} className="text-gray-500 hover:text-gray-900">
-          <img src={link.src} alt={link.alt} className="w-6 h-6"/>
-        </a>
+const NavLinks = ({className = ""}) => (
+  <nav>
+    <ul className={`flex ${className}`}>
+      {NAV_LINKS.map(({href, label}) => (
+        <li key={href}>
+          <a href={href} className={`nav-link ${dmSans.className}`}>
+            {label}
+          </a>
+        </li>
       ))}
-    </div>
-  );
+    </ul>
+  </nav>
+);
 
-  const DesktopFooter = () => (
-    <div className="hidden md:block max-w-7xl mx-auto px-16 py-8">
-      <div className="flex justify-between items-start">
-        {/* Logo Section */}
-        <div className="flex items-center space-x-6">
-          <img
-            src="/images/konnexion_logo.svg"
-            alt="Konnexions"
-            className="max-h-16 object-contain"
-          />
-          <img
-            src="/images/campus_feed_logo.svg"
-            alt="Campus Feed"
-            className="max-h-7"
-          />
-        </div>
-        {/* Navigation and Social Links */}
-        <div className="flex flex-col space-y-6">
-          {renderNavLinks()}
-          {renderSocialLinks()}
-        </div>
-      </div>
-      <div className="border-t-2 border-[#6DA27D] my-8"/>
-      <div className="text-center">
-        <p className={`text-sm ${dmSans.className}`} style={{color: "#52525B"}}>
-          © Copyright 2025, All Rights
-          Reserved
-        </p>
-      </div>
-    </div>
-  );
+const SocialLinks = ({className = ""}) => (
+  <div className={`flex ${className}`}>
+    {SOCIAL_LINKS.map(({href, src, alt}) => (
+      <a
+        key={alt}
+        href={href}
+        className="text-gray-500 hover:text-gray-900"
+      >
+        <img src={src} alt={alt} className="w-6 h-6"/>
+      </a>
+    ))}
+  </div>
+);
 
-  const MobileFooter = () => (
-    <div className="md:hidden px-6 py-8">
-      {/* Logo Section */}
-      <div className="flex flex-col items-center space-y-6">
+const Copyright = () => (
+  <p className={`text-sm ${dmSans.className}`} style={{color: "#52525B"}}>
+    © Copyright 2025, All Rights Reserved
+  </p>
+);
+
+const DesktopFooter = () => (
+  <div className="hidden md:block max-w-7xl mx-auto px-16 py-8">
+    <div className="flex justify-between items-start">
+      <div className="flex items-center space-x-6">
+        <img
+          src="/images/konnexion_logo.svg"
+          alt="Konnexions"
+          className="max-h-16 object-contain"
+        />
         <img
           src="/images/campus_feed_logo.svg"
-          alt="Campus Feed Logo"
-          className="max-h-8"
+          alt="Campus Feed"
+          className="max-h-7"
         />
       </div>
-
-      {/* Navigation Links */}
-      <nav className="mt-8">
-        <ul className="flex flex-wrap justify-center gap-6">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a href={link.href} className={`nav-link ${dmSans.className}`}>
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-      {/* Social Media Icons */}
-      <div className="flex justify-center items-center space-x-8 mt-6">
-        {socialLinks.map((link) => (
-          <a key={link.alt} href={link.href} className="text-gray-500 hover:text-gray-900">
-            <img src={link.src} alt={link.alt} className="w-6 h-6"/>
-          </a>
-        ))}
-      </div>
-
-      {/* Spacer */}
-      <div className="my-6 border-0 md:border-t-2"/>
-
-      {/* Copyright Section */}
-      <div className="text-center">
-        <p className={`text-sm ${dmSans.className}`} style={{color: "#52525B"}}>
-          © Copyright 2025, All Rights Reserved
-        </p>
+      <div className="flex flex-col space-y-6">
+        <NavLinks className="justify-end space-x-9"/>
+        <SocialLinks className="justify-end space-x-4"/>
       </div>
     </div>
-  );
+    <div className="border-t-2 border-[#6DA27D] my-8"/>
+    <div className="text-center">
+      <Copyright/>
+    </div>
+  </div>
+);
 
+const MobileFooter = () => (
+  <div className="md:hidden px-6 py-8">
+    <div className="flex flex-col items-center space-y-6">
+      <img
+        src="/images/campus_feed_logo.svg"
+        alt="Campus Feed Logo"
+        className="max-h-8"
+      />
+    </div>
+    <NavLinks className="mt-8 flex-wrap justify-center gap-6"/>
+    <SocialLinks className="justify-center items-center space-x-8 mt-6"/>
+    <div className="my-6 border-0 md:border-t-2"/>
+    <div className="text-center">
+      <Copyright/>
+    </div>
+  </div>
+);
 
+export default function Footer() {
   return (
     <footer className="w-full bg-white border-[#6DA27D] border-t-0 md:border-t-2">
       <DesktopFooter/>
