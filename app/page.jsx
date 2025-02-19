@@ -6,10 +6,10 @@ import Features from "@/components/sections/Features";
 export default function Landing() {
   return (
     <div>
-      <HeroSection/>
-      <Features/>
-      <AboutUsSection/>
-      <FooterSection/>
+      <HeroSection />
+      <Features />
+      <AboutUsSection />
+      <FooterSection />
     </div>
   );
 }
