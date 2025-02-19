@@ -1,6 +1,13 @@
 import HeroSection from '@/components/sections/HeroSection'
-import { Button } from '@heroui/react'
+import AboutUsSection from "@/components/sections/AbousUsSection";
+import Features from "@/components/sections/Features";
 
 export default function Landing() {
-  return <HeroSection />
+   return (
+    <div>
+      <HeroSection/>
+      <Features />
+      <AboutUsSection/>
+    </div>
+  );
 }
