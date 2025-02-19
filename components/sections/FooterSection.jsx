@@ -96,7 +96,7 @@ export default function FooterSection() {
         </nav>
 
         {/* Social Media Icons */}
-        <div className="flex justify-center space-x-8 mt-8">
+        <div className="flex justify-center space-x-2 mt-8">
           <a href="#" className="text-gray-700 hover:text-gray-900">
             <img
               src="/images/facebook.svg"
@@ -121,7 +121,7 @@ export default function FooterSection() {
         </div>
 
         {/* Horizontal Line */}
-        <div className="border-t-2 border-[#6DA27D] my-8"/>
+        <div className="border-t-2 border-[#6DA27D] my-6"/>
 
         {/* Copyright Section */}
         <div className="text-center">
