@@ -1,4 +1,4 @@
-import { DM_Sans } from "next/font/google";
+import {DM_Sans} from "next/font/google";
 
 const dmSans = DM_Sans({
   style: "normal",
@@ -16,24 +16,24 @@ export default function FooterSection() {
             <img
               src="/images/konnexion_logo.svg"
               alt="Konnexions Logo"
-              className="h-12 object-contain"
+              className="max-h-16 object-contain"
             />
             <img
               src="/images/campus_feed_logo.svg"
               alt="Campus Feed Logo"
-              className="max-h-5"
+              className="max-h-7"
             />
           </div>
 
           {/* Right: Navigation and Social Links */}
-          <div className="flex flex-col space-y-8">
+          <div className="flex flex-col space-y-6">
             {/* Navigation Links */}
             <nav>
-              <ul className="flex justify-end space-x-12">
-                <li><a href="/" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>Home</a></li>
-                <li><a href="/about" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>About Us</a></li>
-                <li><a href="/events" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>Events</a></li>
-                <li><a href="/contact" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>Contact Us</a></li>
+              <ul className="flex justify-end space-x-9">
+                <li><a href="/" className={`nav-link ${dmSans.className}`}>Home</a></li>
+                <li><a href="/about" className={`nav-link ${dmSans.className}`}>About Us</a></li>
+                <li><a href="/events" className={`nav-link ${dmSans.className}`}>Events</a></li>
+                <li><a href="/contact" className={`nav-link ${dmSans.className}`}>Contact Us</a></li>
               </ul>
             </nav>
 
@@ -69,7 +69,7 @@ export default function FooterSection() {
 
         {/* Copyright Section */}
         <div className="text-center">
-          <p className="text-gray-600 text-sm">© Copyright 2025, All Rights Reserved</p>
+          <p className={`text-gray-600 text-sm ${dmSans.className}`}>© Copyright 2025, All Rights Reserved</p>
         </div>
       </div>
 
@@ -90,7 +90,8 @@ export default function FooterSection() {
             <li><a href="/" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>Home</a></li>
             <li><a href="/about" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>About Us</a></li>
             <li><a href="/events" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>Events</a></li>
-            <li><a href="/contact" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>Contact Us</a></li>
+            <li><a href="/contact" className={`text-gray-700 hover:text-gray-900 ${dmSans.className}`}>Contact Us</a>
+            </li>
           </ul>
         </nav>
 
@@ -124,7 +125,7 @@ export default function FooterSection() {
 
         {/* Copyright Section */}
         <div className="text-center">
-          <p className="text-gray-600 text-sm">© Copyright 2025, All Rights Reserved</p>
+          <p className={`text-gray-600 text-sm ${dmSans.className}`}>© Copyright 2025, All Rights Reserved</p>
         </div>
       </div>
     </footer>
