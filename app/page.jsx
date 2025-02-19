@@ -1,6 +1,5 @@
-import FooterSection from "@/components/sections/FooterSection";
 import HeroSection from "@/components/sections/HeroSection";
-import AboutUsSection from "@/components/sections/AboutUsSection";
+import AboutUsSection from "@/components/sections/AbousUsSection";
 import Features from "@/components/sections/Features";
 
 export default function Landing() {
@@ -9,7 +8,6 @@ export default function Landing() {
       <HeroSection />
       <Features />
       <AboutUsSection />
-      <FooterSection />
     </div>
   );
 }
