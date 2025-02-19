@@ -5,10 +5,10 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      <section className="px-4 lg:px-0 py-5 lg:w-[75%] mx-auto">
+      <section className="px-4 lg:px-0 py-5 md:w-[80%] lg:w-[75%] mx-auto">
         <header className="flex justify-between items-center">
           <p className="text-[40px]">Events</p>
-          <div className="flex gap-1 text-sm">
+          <div className="gap-1 text-sm hidden md:flex">
             <button className="bg-[#6DA27D] rounded-md p-2 text-white">
               Filter
             </button>
@@ -30,6 +30,7 @@ export default function Home() {
             </div>
           </div>
         </header>
+        <div className="border-2 border-black mt-3 px-4 md:px-0"></div>
       </section>
     </>
   )
