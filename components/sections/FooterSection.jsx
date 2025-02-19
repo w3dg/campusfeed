@@ -15,12 +15,12 @@ export default function FooterSection() {
           <div className="flex items-center space-x-6">
             <img
               src="/images/konnexion_logo.svg"
-              alt="Konnexions Logo"
+              alt="Konnexions"
               className="max-h-16 object-contain"
             />
             <img
               src="/images/campus_feed_logo.svg"
-              alt="Campus Feed Logo"
+              alt="Campus Feed"
               className="max-h-7"
             />
           </div>
