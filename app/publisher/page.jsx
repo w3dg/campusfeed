@@ -1,24 +1,23 @@
-import Image from 'next/image'
-import React from 'react'
+import { Card, CardBody, CardHeader, Form } from "@heroui/react";
 
-export const page = () => {
+const PublisherPage = () => {
   return (
-    <section id="publisher" className="relative isolate overflow-hidden px-6 lg:px-16">
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-96"
-        >
-              <Image
-                src="/ellipse.svg"
-                alt="ellipse"
-                width={1440}
-                height={578}
-                className="relative opacity-50 right-[calc(50%-11rem)] aspect-square w-[36.125rem] translate-x-[100%] sm:right-[calc(50%-45rem)] sm:w-[60.1875rem] "
-              />
-            </div>
-            <div></div>
-      </section>
-  )
-}
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#e8f5e9] via-[#e3f2fd] to-[#f3e5f5] px-4 py-16">
+      <Card className="mx-auto w-full max-w-4xl rounded-2xl bg-white/80 p-6 shadow-2xl backdrop-blur-sm">
+        <CardHeader className="space-y-1">
+          <h1 className="flex items-center gap-2 text-2xl">
+            Campus Feed
+            <span className="text-muted-foreground ml-2 text-base font-normal">
+              Details Form
+            </span>
+          </h1>
+        </CardHeader>
+        <CardBody>
+          <Form className="h-[400px] space-y-8"></Form>
+        </CardBody>
+      </Card>
+    </div>
+  );
+};
 
-export default page
+export default PublisherPage;
