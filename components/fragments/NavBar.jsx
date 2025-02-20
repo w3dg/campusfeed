@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import HamburgerMenu from './HamburgerMenu'
+import Link from 'next/link'
 
 const NavBar = () => {
   const navLinks = ['Home', 'Events', 'Features', 'About', 'Contact Us']
@@ -16,13 +17,13 @@ const NavBar = () => {
       </a>
       <div className="hidden lg:flex bg-[#ABBEC9] bg-opacity-50 px-2 py-1 rounded-xl items-center justify-between min-w-fit gap-1 lg:gap-3">
         {navLinks.map((item) => (
-         <a
-         key={item}
-         href={`${item !== 'Home' ? `/${item.toLowerCase()}` : '/'}`}
-         className="py-1 px-2 hover:bg-[#ABBEC9] hover:bg-opacity-90 rounded-md transition-colors duration-200"
-       >
-         {item}
-       </a>
+          <Link
+            key={item}
+            href={`${item !== 'Home' ? `/${item.toLowerCase()}` : '/'}`}
+            className="py-1 px-2 hover:bg-[#ABBEC9] hover:bg-opacity-90 rounded-md transition-colors duration-200"
+          >
+            {item}
+          </Link>
         ))}
       </div>
       <button className="bg-[#6DA27D] ml-4 rounded-lg py-2 px-4 text-white hover:scale-105 hover:shadow-lg transition-all duration-200 hidden lg:block">
