@@ -4,6 +4,7 @@ import NavBar from "@/components/fragments/NavBar";
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Dropdown } from "@heroui/react";
 
 const events = [
   {
@@ -113,7 +114,7 @@ export default function Home() {
                 }}
                 className="bg-[#6DA27D] rounded-md p-2 text-white"
               >
-                Filter ▼
+                Filter <Image src={"Dropdown.svg"} alt={"Dropdown"} width={10} height={10} className="inline"></Image>
               </button>
               <AnimatePresence>
                 {filterOpen && (
@@ -150,7 +151,7 @@ export default function Home() {
                 }}
                 className="bg-[#6DA27D] rounded-md p-2 text-white"
               >
-                Sort By ▼
+                Sort By <Image src={"Dropdown.svg"} alt={"Dropdown"} width={10} height={10} className="inline"></Image>
               </button>
               <AnimatePresence>
                 {sortOpen && (
