@@ -2,7 +2,7 @@ import Image from 'next/image'
 import HamburgerMenu from './HamburgerMenu'
 
 const NavBar = () => {
-  const navLinks = ['Home', 'Events', 'About', 'Contact Us']
+  const navLinks = ['Home', 'Events', 'Features', 'About', 'Contact Us']
   return (
     <nav className="p-4 md:w-[95%] lg:w-[90%] md:mx-auto flex items-center justify-between">
       <a href="/">
@@ -14,7 +14,7 @@ const NavBar = () => {
           className="w-[153px] h-[40px] md:w-[203px] md:h-[35px] cursor-pointer"
         />
       </a>
-      <div className="hidden md:flex bg-[#ABBEC9] bg-opacity-50 px-2 py-1 rounded-xl items-center justify-between min-w-fit gap-3">
+      <div className="hidden md:flex bg-[#ABBEC9] bg-opacity-50 px-2 py-1 rounded-xl items-center justify-between min-w-fit gap-1 lg:gap-3">
         {navLinks.map((item) => (
           <a
             key={item}
