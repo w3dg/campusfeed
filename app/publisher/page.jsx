@@ -1,8 +1,18 @@
 "use client";
 
-import { Card, CardBody, CardHeader, Form, Input } from "@heroui/react";
+import {
+  Button,
+  Card,
+  CardHeader,
+  DateRangePicker,
+  Divider,
+  Form,
+  Input,
+  Textarea,
+} from "@heroui/react";
 import Image from "next/image";
 import { useState } from "react";
+import { FaUpload } from "react-icons/fa";
 
 export const detailsForm = () => {
   const [formData, setFormData] = useState({
@@ -43,123 +53,138 @@ const PublisherPage = () => {
     <div className="min-h-screen w-full bg-gradient-to-br from-[#e8f5e9] via-[#e3f2fd] to-[#f3e5f5] px-4 py-10">
       <Card className="mx-auto w-full max-w-4xl items-center justify-center rounded-2xl bg-white/80 p-6 shadow-2xl backdrop-blur-sm">
         <Form onSubmit={handleSubmit}>
-          <CardHeader className="space-y-1">
-            <Image src="navlogo.svg" width={200} height={200} alt="logo" />
-            <span className="text-muted-foreground ml-2 text-base font-normal">
-              Details Form
-            </span>
+          <CardHeader className="items-center space-x-2 divide-x-2 divide-gray-300">
+            <Image
+              src="navlogo.svg"
+              width={200}
+              height={200}
+              alt="logo"
+              className="-ml-4 aspect-video pr-2"
+            />
+            <span className="pl-3 text-base font-normal">Details Form</span>
           </CardHeader>
           <h3 className="mb-2 font-medium">Publisher Details</h3>
-          <div className="mb-4 grid grid-cols-3 gap-4">
-            <input
+          <Divider className="mb-4 bg-[#6DA27D]" />
+          <div className="mb-4 grid w-full grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <Input
               type="text"
               name="firstName"
-              placeholder="First Name"
+              label="First Name"
+              variant="bordered"
               onChange={handleChange}
-              className="rounded border border-gray-300 p-2"
+              isRequired
             />
-            <input
+            <Input
               type="text"
               name="lastName"
-              placeholder="Last Name"
+              label="Last Name"
+              variant="bordered"
               onChange={handleChange}
-              className="rounded border border-gray-300 p-2"
+              isRequired
             />
-            <input
+            <Input
               type="text"
               name="position"
-              placeholder="Position"
+              label="Position"
+              variant="bordered"
               onChange={handleChange}
-              className="rounded border border-gray-300 p-2"
+              isRequired
             />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email ID"
-              onChange={handleChange}
-              className="rounded border border-gray-300 p-2"
-            />
-            <input
+            <Input
               type="text"
               name="phone"
-              placeholder="Phone Number"
+              label="Phone Number"
+              variant="bordered"
               onChange={handleChange}
-              className="rounded border border-gray-300 p-2"
+            />
+            <Input
+              type="email"
+              name="email"
+              label="Email ID"
+              variant="bordered"
+              onChange={handleChange}
+              className="sm:col-span-2"
+              isRequired
             />
           </div>
 
           <h3 className="mb-2 font-medium">Event Details</h3>
-          <div className="mb-4 grid grid-cols-3 gap-4">
-            <input
+          <Divider className="mb-4 bg-[#6DA27D]" />
+          <div className="mb-4 grid w-full grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <Input
               type="text"
               name="title"
-              placeholder="Title"
+              label="Event Title"
+              variant="bordered"
               onChange={handleChange}
-              className="rounded border border-gray-300 p-2"
+              isRequired
             />
-            <input
+            <Input
               type="text"
               name="school"
-              placeholder="Organising School/Society"
+              label="Organising School/Society"
+              variant="bordered"
               onChange={handleChange}
-              className="rounded border border-gray-300 p-2"
+              isRequired
             />
-            <input
+            <Input
               type="text"
               name="venue"
-              placeholder="Venue"
+              label="Venue"
+              variant="bordered"
               onChange={handleChange}
-              className="rounded border border-gray-300 p-2"
+              isRequired
             />
-            <input
-              type="date"
-              name="startDate"
+            <DateRangePicker
+              name="duration"
+              label="Duration"
+              variant="bordered"
               onChange={handleChange}
-              className="rounded border border-gray-300 p-2"
+              isRequired
             />
-            <input
-              type="date"
-              name="endDate"
-              onChange={handleChange}
-              className="rounded border border-gray-300 p-2"
-            />
-            <input
+            <Input
               type="text"
               name="socialLinks"
-              placeholder="Social Media Links"
+              label="Social Media Links"
+              variant="bordered"
               onChange={handleChange}
-              className="rounded border border-gray-300 p-2"
             />
-            <input
+            <Input
               type="text"
               name="registrationLinks"
-              placeholder="Registration Links"
+              label="Registration Links"
+              variant="bordered"
               onChange={handleChange}
-              className="rounded border border-gray-300 p-2"
+              isRequired
             />
           </div>
-
-          <textarea
-            name="description"
-            placeholder="Description"
-            onChange={handleChange}
-            className="mb-4 w-full rounded border border-gray-300 p-2"
-            rows="4"
-          />
-
-          <div className="jsutify-between flex">
-            <button
-              type="button"
-              className="rounded border border-gray-300 p-2"
-            >
+          <div className="mb-4 grid w-full grid-cols-1 gap-8 lg:grid-cols-2">
+            <Textarea
+              name="description"
+              label="Description"
+              variant="bordered"
+              isRequired
+              onChange={handleChange}
+              rows="4"
+            />
+            <Input
+              type="url"
+              name="image"
+              label="Upload Image URL"
+              variant="bordered"
+              icon={<FaUpload />}
+              onChange={handleChange}
+              isRequired
+            />
+          </div>
+          <Divider className="mb-4 bg-[#6DA27D]" />
+          <div className="jsutify-between flex w-full flex-col gap-4 sm:flex-row">
+            <Button type="button" variant="bordered" className="w-full">
               Cancel
-            </button>
-            <button
-              type="submit"
-              className="rounded bg-green-500 p-2 text-white"
-            >
+            </Button>
+            <Button type="submit" className="w-full bg-[#6DA27D] text-white">
               Confirm
-            </button>
+            </Button>
           </div>
         </Form>
       </Card>
