@@ -14,7 +14,7 @@ const NavBar = () => {
           className="w-[153px] h-[40px] md:w-[203px] md:h-[35px] cursor-pointer"
         />
       </a>
-      <div className="hidden md:flex bg-[#ABBEC9] bg-opacity-50 px-2 py-1 rounded-xl items-center justify-between min-w-fit gap-1 lg:gap-3">
+      <div className="hidden lg:flex bg-[#ABBEC9] bg-opacity-50 px-2 py-1 rounded-xl items-center justify-between min-w-fit gap-1 lg:gap-3">
         {navLinks.map((item) => (
           <a
             key={item}
@@ -25,7 +25,7 @@ const NavBar = () => {
           </a>
         ))}
       </div>
-      <button className="bg-[#6DA27D] ml-4 rounded-lg py-2 px-4 text-white hover:scale-105 hover:shadow-lg transition-all duration-200 hidden md:block">
+      <button className="bg-[#6DA27D] ml-4 rounded-lg py-2 px-4 text-white hover:scale-105 hover:shadow-lg transition-all duration-200 hidden lg:block">
         Register
       </button>
       <HamburgerMenu navLinks={navLinks} />

@@ -10,7 +10,7 @@ const HamburgerMenu = ({ navLinks }) => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
   return (
-    <div className="relative md:hidden">
+    <div className="relative lg:hidden">
       <motion.button
         className="relative w-[30px] h-[30px] z-50 flex items-center justify-center"
         onClick={toggleMenu}
