@@ -90,79 +90,100 @@ const events = [
     eventDate: "Sat-25-Mar",
     eventPrice: 400.0,
   },
-  {
-    eventPoster: "EventDemo1.svg",
-    eventName: "KODESPHERE - The Flagship Event",
-    eventLocation: "Campus-13",
-    eventDate: "Sat-25-Mar",
-    eventPrice: 200.0,
-  },
-  {
-    eventPoster: "EventDemo2.svg",
-    eventName: "SPOTLIGHT - The Flagship Event",
-    eventLocation: "Campus-14",
-    eventDate: "Sat-25-Mar",
-    eventPrice: 300.0,
-  },
-  {
-    eventPoster: "EventDemo3.svg",
-    eventName: "STEP IT UP - The Flagship Event",
-    eventLocation: "Campus-15",
-    eventDate: "Sat-25-Mar",
-    eventPrice: 400.0,
-  },
-  {
-    eventPoster: "EventDemo1.svg",
-    eventName: "KODESPHERE - The Flagship Event",
-    eventLocation: "Campus-13",
-    eventDate: "Sat-25-Mar",
-    eventPrice: 200.0,
-  },
-  {
-    eventPoster: "EventDemo2.svg",
-    eventName: "SPOTLIGHT - The Flagship Event",
-    eventLocation: "Campus-14",
-    eventDate: "Sat-25-Mar",
-    eventPrice: 300.0,
-  },
-  {
-    eventPoster: "EventDemo3.svg",
-    eventName: "STEP IT UP - The Flagship Event",
-    eventLocation: "Campus-15",
-    eventDate: "Sat-25-Mar",
-    eventPrice: 400.0,
-  },
 ];
 
 export default function Home() {
   const [search, setSearch] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [sortOpen, setSortOpen] = useState(false);
+
   return (
     <>
       <NavBar />
-      <section className="px-4 lg:px-0 py-5 md:w-[80%] lg:w-[75%] mx-auto">
+      <section className="px-4 lg:px-0 py-5 md:w-[80%] lg:w-[75%] mx-auto max-w-6xl relative">
         <header className="flex justify-between items-center">
           <p className="text-[40px]">Events</p>
-          <div className="gap-1 text-sm hidden md:flex">
-            <button className="bg-[#6DA27D] rounded-md p-2 text-white">
-              Filter
-            </button>
-            <button className="bg-[#6DA27D] rounded-md p-2 text-white">
-              Sort By
-            </button>
-            <div className="flex gap-1 items-center bg-[#D3DEE3] px-3 py-1 rounded-md min-w-[250px]">
+          <div className="gap-2 text-sm hidden md:flex items-center">
+            {/* Filter Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => {setFilterOpen(!filterOpen); setSortOpen(false)}}
+                className="bg-[#6DA27D] rounded-md p-2 text-white"
+              >
+                Filter ▼
+              </button>
+              <AnimatePresence>
+                {filterOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute bg-white shadow-lg rounded-md p-3 w-40 mt-1"
+                  >
+                    <p className="text-sm font-semibold">Filter By:</p>
+                    <ul className="mt-1 space-y-2">
+                      <li className="hover:bg-gray-100 p-1 rounded-md cursor-pointer">
+                        Price
+                      </li>
+                      <li className="hover:bg-gray-100 p-1 rounded-md cursor-pointer">
+                        Location
+                      </li>
+                      <li className="hover:bg-gray-100 p-1 rounded-md cursor-pointer">
+                        Date
+                      </li>
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Sort By Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => {setSortOpen(!sortOpen); setFilterOpen(false)}}
+                className="bg-[#6DA27D] rounded-md p-2 text-white"
+              >
+                Sort By ▼
+              </button>
+              <AnimatePresence>
+                {sortOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute bg-white shadow-lg rounded-md p-3 w-40 mt-1"
+                  >
+                    <p className="text-sm font-semibold">Sort By:</p>
+                    <ul className="mt-1 space-y-2">
+                      <li className="hover:bg-gray-100 p-1 rounded-md cursor-pointer">
+                        Price: Low to High
+                      </li>
+                      <li className="hover:bg-gray-100 p-1 rounded-md cursor-pointer">
+                        Price: High to Low
+                      </li>
+                      <li className="hover:bg-gray-100 p-1 rounded-md cursor-pointer">
+                        Date: Newest First
+                      </li>
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Search Bar */}
+            <div className="flex gap-1 items-center bg-[#D3DEE3] px-3 py-2 rounded-md min-w-[250px]">
               <input
                 placeholder="Search for something.."
                 type="text"
                 className="bg-transparent pr-3 rounded-md placeholder:text-black/45 placeholder:text-sm placeholder:font-light focus:outline-none w-[95%]"
               />
-              <Image
-                src={"/SearchIcon.svg"}
-                height={20}
-                width={20}
-                alt="search"
-              />
+              <Image src={"/SearchIcon.svg"} height={20} width={20} alt="search" />
             </div>
           </div>
+
+          {/* Mobile Search Icon */}
           <AnimatePresence>
             {!search ? (
               <motion.div
@@ -213,7 +234,9 @@ export default function Home() {
             )}
           </AnimatePresence>
         </header>
-        <div className="mt-3 px-0 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-2 md:gap-x-4 gap-y-10">
+
+        {/* Event Cards */}
+        <div className="mt-3 2xl:mt-6 px-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 md:gap-x-4 gap-y-10">
           {events.map((event, index) => (
             <EventCard event={event} key={index} />
           ))}
