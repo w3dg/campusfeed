@@ -103,11 +103,14 @@ export default function Home() {
       <section className="px-4 lg:px-0 py-5 md:w-[80%] lg:w-[75%] mx-auto max-w-6xl relative">
         <header className="flex justify-between items-center">
           <p className="text-[40px]">Events</p>
-          <div className="gap-2 text-sm hidden md:flex items-center">
+          <div className="gap-2 text-sm hidden md:flex items-center z-10">
             {/* Filter Dropdown */}
             <div className="relative">
               <button
-                onClick={() => {setFilterOpen(!filterOpen); setSortOpen(false)}}
+                onClick={() => {
+                  setFilterOpen(!filterOpen);
+                  setSortOpen(false);
+                }}
                 className="bg-[#6DA27D] rounded-md p-2 text-white"
               >
                 Filter ▼
@@ -141,7 +144,10 @@ export default function Home() {
             {/* Sort By Dropdown */}
             <div className="relative">
               <button
-                onClick={() => {setSortOpen(!sortOpen); setFilterOpen(false)}}
+                onClick={() => {
+                  setSortOpen(!sortOpen);
+                  setFilterOpen(false);
+                }}
                 className="bg-[#6DA27D] rounded-md p-2 text-white"
               >
                 Sort By ▼
@@ -179,7 +185,12 @@ export default function Home() {
                 type="text"
                 className="bg-transparent pr-3 rounded-md placeholder:text-black/45 placeholder:text-sm placeholder:font-light focus:outline-none w-[95%]"
               />
-              <Image src={"/SearchIcon.svg"} height={20} width={20} alt="search" />
+              <Image
+                src={"/SearchIcon.svg"}
+                height={20}
+                width={20}
+                alt="search"
+              />
             </div>
           </div>
 
@@ -204,12 +215,12 @@ export default function Home() {
               <motion.div className="relative md:hidden">
                 <motion.input
                   initial={{ width: 0, opacity: 0 }}
-                  animate={{ width: "auto", opacity: 1 }}
+                  animate={{ width: 'auto', opacity: 1 }}
                   exit={{ width: 0, opacity: 0 }}
                   transition={{ duration: 0.3 }}
                   placeholder="Search "
                   type="text"
-                  className="bg-[#D3DEE3] py-1 pl-3 pr-8 border-2 rounded-2xl placeholder:text-black/45 placeholder:text-sm placeholder:font-light focus:outline-none"
+                  className="bg-[#D3DEE3] py-1 pl-3 pr-8 border-2 rounded-2xl placeholder:text-black/45 placeholder:text-sm placeholder:font-light focus:outline-none w-[200px]"
                 />
                 <button
                   onClick={() => setSearch(false)}
@@ -234,9 +245,11 @@ export default function Home() {
             )}
           </AnimatePresence>
         </header>
-
         {/* Event Cards */}
-        <div className="mt-3 2xl:mt-6 px-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 md:gap-x-4 gap-y-10">
+        <div className="mt-3 2xl:mt-6 px-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 md:gap-x-4 gap-y-10 relative">
+          <div className="fixed w-[20%] h-[40%]  bg-[#b9eec966] blur-2xl rounded-full -z-10 -left-[2%] top-[40%] pointer-events-none"></div>
+          <div className="fixed w-[20%] h-[40%] bg-[#b9eec966] blur-2xl rounded-full -z-10 -right-[5%] top-[20%] pointer-events-none"></div>
+
           {events.map((event, index) => (
             <EventCard event={event} key={index} />
           ))}
