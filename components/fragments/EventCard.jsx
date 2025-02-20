@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 const EventCard = () => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col ">
       <Image
         src={'/EventDemo.svg'}
         alt="event"
