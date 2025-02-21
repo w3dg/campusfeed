@@ -31,7 +31,7 @@ const HeroSection = () => {
       </section> */}
       <section className="flex flex-col pt-12 px-4 xl:px-10">
         <div
-          className="flex flex-col items-center justify-between rounded-[30px]"
+          className="flex flex-col items-center justify-between rounded-b-[30px]"
           style={{
             background:
               'linear-gradient(to bottom, #FCFDFD 0%, #eff5f1 50%, #e4eee7 80%, #a8cab2 100%)',

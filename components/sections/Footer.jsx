@@ -7,7 +7,8 @@ const dmSans = DM_Sans({
 
 const NAV_LINKS = [
   {href: "/", label: "Home"},
-  {href: "/about", label: "About"},
+  {href: "/about", label: "About Us"},
+  {href: "/features", label: "Features"},
   {href: "/events", label: "Events"},
   {href: "/contact", label: "Contact Us"},
 ];
