@@ -5,14 +5,14 @@ import Link from 'next/link'
 const NavBar = () => {
   const navLinks = ['Home', 'Events', 'Features', 'About', 'Contact Us']
   return (
-    <nav className="p-4 md:w-[95%] lg:w-[90%] md:mx-auto flex items-center justify-between">
+    <nav className="flex items-center justify-between p-4 md:mx-auto md:w-[95%] lg:w-[90%]">
       <a href="/">
         <Image
-          src={'/navlogo.svg'}
+          src={"/navlogo.svg"}
           width={153}
           height={40}
           alt="Logo"
-          className="w-[153px] h-[40px] md:w-[203px] md:h-[35px] cursor-pointer"
+          className="h-[40px] w-[153px] cursor-pointer md:h-[35px] md:w-[203px]"
         />
       </a>
       <div className="hidden lg:flex bg-[#ABBEC9] bg-opacity-50 px-2 py-1 rounded-xl items-center justify-between min-w-fit gap-1 lg:gap-3">
@@ -26,12 +26,12 @@ const NavBar = () => {
           </Link>
         ))}
       </div>
-      <button className="bg-[#6DA27D] ml-4 rounded-lg py-2 px-4 text-white hover:scale-105 hover:shadow-lg transition-all duration-200 hidden lg:block">
+      <Button className="bg-[#6DA27D] ml-4 rounded-lg py-2 px-4 text-white hover:scale-105 hover:shadow-lg transition-all duration-200 hidden lg:block">
         Register
-      </button>
+      </Button>
       <HamburgerMenu navLinks={navLinks} />
     </nav>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;
