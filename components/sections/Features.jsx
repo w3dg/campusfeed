@@ -49,18 +49,18 @@ export default function Features() {
   return (
     <section
       id="features"
-      className="relative isolate overflow-hidden px-6 lg:px-16"
+      className="relative isolate overflow-hidden bg-transparent px-6 lg:px-16"
     >
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-96"
+        className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-visible blur-3xl sm:-top-96"
       >
         <Image
           src="/ellipse.svg"
           alt="ellipse"
           width={1440}
           height={578}
-          className="relative right-[calc(50%-11rem)] aspect-square w-[36.125rem] translate-x-[100%] opacity-50 sm:right-[calc(50%-45rem)] sm:w-[60.1875rem]"
+          className="right-[calc(50%-11rem)] z-50 aspect-square w-[36.125rem] translate-x-[100%] opacity-50 sm:right-[calc(50%-45rem)] sm:w-[60.1875rem]"
         />
       </div>
       <div className="py-24 sm:py-32">
