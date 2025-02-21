@@ -17,7 +17,7 @@ const AboutUsSection = () => {
           alt="ellipse"
           width={1440}
           height={578}
-          className="relative left-[calc(50%-11rem)] aspect-square w-[36.125rem] translate-x-[100%] opacity-50 sm:left-[calc(50%-45rem)] sm:w-[60.1875rem]"
+          className="z-80 relative right-0 aspect-square w-[36.125rem] translate-x-[100%] opacity-50 sm:right-[calc(50%-45rem)] sm:w-[60.1875rem]"
         />
       </div>
       <div className="py-24 sm:py-32">
