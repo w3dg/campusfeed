@@ -1,30 +1,40 @@
-const EventCard = ({item}) =>{
-    return(
-    <div className="flex flex-col ">
-            <div
-              className="h-[70%] rounded-md 2xl:rounded-[18.5px] overflow-hidden relative  
-             md:h-[80%] 2xl:h-[50vh] border-[5px] border-slate-200 bg-no-repeat bg-cover bg-center"
-             style={{ backgroundImage: `url(${item})` }}
-             ></div>
-            <div className=" h-[22%] rounded-md mt-[4px] flex gap-1 relative md:mt-[6px] 2xl:h-[0px]">
-              <div className="flex flex-col text-[5px] rounded-[2px] overflow-hidden w-3 md:w-7 md:rounded-md">
-                <div className="bg-gray-500  h-[45%] text-[4px] text-white pt-[1px] md:text-[8px] md:flex md:justify-center md:items-center">
-                  Sat
-                </div>
-                <div className="bg-gray-300  h-[70%] text-[4px]/[4px] pt-[1px] md:text-[8px] md:flex md:justify-center md:items-center md:p-[3px] md:leading-[8px]">
-                  27 Mar
-                </div>
-              </div>
-              <div className="flex flex-col gap-[1px] items-start md:gap-[6px]">
-                <div className="text-[5px] h-[5px] md:text-[9px]">Name</div>
-                <div className="text-[5px] h-[5px] md:text-[9px]">Location</div>
-                <div className="text-[5px] h-[5px] text-gray-400 md:text-[9px]">
-                  Amount
-                </div>
-              </div>
-            </div>
-          </div>
-          )
+import Image from 'next/image'
+
+const EventCard = ({event}) => {
+const eventDate = event.eventDate.split("-");
+  return (
+    <div className="flex flex-col w-full max-w-[300px]">
+      <Image
+        src={event.eventPoster}
+        alt="event"
+        width={250}
+        height={250}
+        className="w-full aspect-square border-[3px] sm:border-[4px] md:border-[5px] border-[#D3DEE3] rounded-2xl object-contain"
+      />
+      <div className="flex mt-3 gap-2 w-full">
+        <div className="flex flex-col items-center text-center rounded-md min-w-[50px]">
+          <p className="text-[10px] sm:text-xs bg-[#8690B1] px-3 py-1 rounded-t-md text-[#FCFDFD] w-full">
+            {eventDate[0]}
+          </p>
+          <p className="text-base sm:text-lg font-medium px-3 bg-[#E7EDF0] w-full">
+          {eventDate[1]}
+          </p>
+          <p className="text-[10px] sm:text-xs px-3 rounded-b-md bg-[#E7EDF0] w-full -mt-1 pb-1">
+          {eventDate[2]}
+          </p>
+        </div>
+        <div className="flex flex-col justify-center flex-1">
+          <p className="font-medium text-sm sm:text-base line-clamp-1 max-sm:w-[85%]">
+            {event.eventName}
+          </p>
+          <p className="font-medium text-xs sm:text-sm text-gray-700">
+            {event.eventLocation}
+          </p>
+          <p className="text-xs sm:text-sm text-black/60">Rs.{event.eventPrice}</p>
+        </div>
+      </div>
+    </div>
+  )
 }
 
-export default EventCard;
+export default EventCard
