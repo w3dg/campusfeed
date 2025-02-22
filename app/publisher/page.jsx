@@ -59,7 +59,7 @@ const PublisherPage = () => {
               width={200}
               height={200}
               alt="logo"
-              className="-ml-4 pr-2"
+              className="-ml-4 aspect-video pr-2"
             />
             <span className="pl-3 text-base font-normal">Details Form</span>
           </CardHeader>
