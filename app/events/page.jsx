@@ -10,97 +10,103 @@ const events = [
     eventPoster: 'EventDemo1.svg',
     eventName: 'KODESPHERE - The Flagship Event',
     eventLocation: 'Campus-13',
-    eventDate: 'Sat-25-Mar',
-    eventPrice: 200.0,
+    eventDate: 'Sat-29-Mar',
+    eventPrize: 200.0,
   },
   {
     eventPoster: 'EventDemo2.svg',
     eventName: 'SPOTLIGHT - The Flagship Event',
     eventLocation: 'Campus-14',
     eventDate: 'Sat-25-Mar',
-    eventPrice: 300.0,
+    eventPrize: 300.0,
   },
   {
     eventPoster: 'EventDemo3.svg',
     eventName: 'STEP IT UP - The Flagship Event',
     eventLocation: 'Campus-15',
     eventDate: 'Sat-25-Mar',
-    eventPrice: 400.0,
+    eventPrize: 400.0,
   },
   {
     eventPoster: 'EventDemo1.svg',
     eventName: 'KODESPHERE - The Flagship Event',
     eventLocation: 'Campus-13',
     eventDate: 'Sat-25-Mar',
-    eventPrice: 200.0,
+    eventPrize: 200.0,
   },
   {
     eventPoster: 'EventDemo2.svg',
     eventName: 'SPOTLIGHT - The Flagship Event',
     eventLocation: 'Campus-14',
     eventDate: 'Sat-25-Mar',
-    eventPrice: 300.0,
+    eventPrize: 300.0,
   },
   {
     eventPoster: 'EventDemo3.svg',
     eventName: 'STEP IT UP - The Flagship Event',
     eventLocation: 'Campus-15',
     eventDate: 'Sat-25-Mar',
-    eventPrice: 400.0,
+    eventPrize: 400.0,
   },
   {
     eventPoster: 'EventDemo1.svg',
     eventName: 'KODESPHERE - The Flagship Event',
     eventLocation: 'Campus-13',
     eventDate: 'Sat-25-Mar',
-    eventPrice: 200.0,
+    eventPrize: 200.0,
   },
   {
     eventPoster: 'EventDemo2.svg',
     eventName: 'SPOTLIGHT - The Flagship Event',
     eventLocation: 'Campus-14',
     eventDate: 'Sat-25-Mar',
-    eventPrice: 300.0,
+    eventPrize: 300.0,
   },
   {
     eventPoster: 'EventDemo3.svg',
     eventName: 'STEP IT UP - The Flagship Event',
     eventLocation: 'Campus-15',
     eventDate: 'Sat-25-Mar',
-    eventPrice: 400.0,
+    eventPrize: 400.0,
   },
   {
     eventPoster: 'EventDemo1.svg',
     eventName: 'KODESPHERE - The Flagship Event',
     eventLocation: 'Campus-13',
     eventDate: 'Sat-25-Mar',
-    eventPrice: 200.0,
+    eventPrize: 200.0,
   },
   {
     eventPoster: 'EventDemo2.svg',
     eventName: 'SPOTLIGHT - The Flagship Event',
     eventLocation: 'Campus-14',
     eventDate: 'Sat-25-Mar',
-    eventPrice: 300.0,
+    eventPrize: 300.0,
   },
   {
     eventPoster: 'EventDemo3.svg',
     eventName: 'STEP IT UP - The Flagship Event',
     eventLocation: 'Campus-15',
-    eventDate: 'Sat-25-Mar',
-    eventPrice: 400.0,
+    eventDate: 'Sat-28-Mar',
+    eventPrize: 400.0,
   },
 ]
+
+const highToLow = events.sort((a, b) => b.eventPrize - a.eventPrize)
+const newestFirst = events.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate))
+
+const sortedEvents = [highToLow, newestFirst]
 
 export default function Home() {
   const [search, setSearch] = useState(false)
   const [filterOpen, setFilterOpen] = useState(false)
   const [sortOpen, setSortOpen] = useState(false)
+  const [sortBy, setSortBy] = useState(0)
 
   return (
     <>
       <NavBar />
-      <section className="px-4 lg:px-0 py-5 md:w-[80%] lg:w-[75%] mx-auto max-w-6xl relative">
+      <section className="px-4 lg:px-0 py-20 md:w-[80%] lg:w-[75%] mx-auto max-w-6xl relative">
         <header className="flex justify-between items-center">
           <p className="text-[40px]">Events</p>
           <div className="gap-2 text-sm hidden md:flex items-center z-10">
@@ -134,7 +140,7 @@ export default function Home() {
                     <p className="text-sm font-semibold">Filter By:</p>
                     <ul className="mt-1 space-y-2">
                       <li className="hover:bg-gray-100 p-1 rounded-md cursor-pointer">
-                        Price
+                        Prize
                       </li>
                       <li className="hover:bg-gray-100 p-1 rounded-md cursor-pointer">
                         Location
@@ -155,9 +161,9 @@ export default function Home() {
                   setSortOpen(!sortOpen)
                   setFilterOpen(false)
                 }}
-                className="bg-[#6DA27D] rounded-md p-2 text-white"
+                className="bg-[#6DA27D] rounded-md p-2 text-white flex items-center gap-1"
               >
-                Sort By{' '}
+                Sort By
                 <Image
                   src={'Dropdown.svg'}
                   alt={'Dropdown'}
@@ -176,14 +182,11 @@ export default function Home() {
                     className="absolute bg-white shadow-lg rounded-md p-3 w-40 mt-1"
                   >
                     <p className="text-sm font-semibold">Sort By:</p>
-                    <ul className="mt-1 space-y-2">
-                      <li className="hover:bg-gray-100 p-1 rounded-md cursor-pointer">
-                        Price: Low to High
+                    <ul className="mt-1 space-y-2">         
+                      <li className={`  p-1 pl-2 rounded-md cursor-pointer ${sortBy === 0 ? 'bg-[#6DA27D]  text-white' : ' text-black hover:bg-gray-100'}`} onClick={() => setSortBy(0)}>
+                        Prize: High to Low
                       </li>
-                      <li className="hover:bg-gray-100 p-1 rounded-md cursor-pointer">
-                        Price: High to Low
-                      </li>
-                      <li className="hover:bg-gray-100 p-1 rounded-md cursor-pointer">
+                      <li className={` p-1 pl-2 rounded-md cursor-pointer ${sortBy === 1 ? 'bg-[#6DA27D] text-white' : ' text-black hover:bg-gray-100 '}`} onClick={() => setSortBy(1)}>
                         Date: Newest First
                       </li>
                     </ul>
@@ -278,7 +281,7 @@ export default function Home() {
           <div className="fixed w-[20%] h-[40%]  bg-[#b9eec966] blur-2xl rounded-full -z-10 -left-[2%] top-[40%] pointer-events-none"></div>
           <div className="fixed w-[20%] h-[40%] bg-[#b9eec966] blur-2xl rounded-full -z-10 -right-[5%] top-[20%] pointer-events-none"></div>
 
-          {events.map((event, index) => (
+          {sortedEvents[sortBy].map((event, index) => (
             <EventCard event={event} key={index} />
           ))}
         </div>
