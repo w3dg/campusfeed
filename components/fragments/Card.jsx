@@ -5,25 +5,27 @@ const ImageCard = ({ title, subtitle = "subtext", image, github }) => {
   return (
     <Card
       isPressable
-      className="bg-gradient-to-b from-slate-800 to-neutral-100 select-none group shrink-0 w-[160px] snap-center h-full rounded-xl hover:scale-105 transform-all duration-200 ease-in-out"
       shadow="lg"
+      classNames={{
+        base: "bg-[#FCFDFD] border-2 border-[#8690b1] select-none group shrink-0 w-[200px] rounded-xl hover:scale-105 transform-all duration-200 ease-in-out h-full",
+      }}
     >
       <CardBody className="overflow-visible p-2">
-        <div className="flex aspect-square overflow-hidden rounded-xl items-center justify-center">
+        <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl">
           <Image
             shadow="sm"
             alt={title}
-            className="object-cover w-[160px] h-[160px]"
+            className="h-[180px] w-[180px] object-cover"
             src={image}
           />
         </div>
       </CardBody>
-      <CardFooter className="justify-between flex flex-row text-neutral-900 w-full">
-        <div className="flex flex-col w-[75%] gap-2 items-center justify-start">
-          <h1 className="text-left font-bold text-md w-full">{title}</h1>
-          <h1 className="text-left text-sm w-full">{subtitle}</h1>
+      <CardFooter className="flex h-full w-full flex-row items-end justify-between text-neutral-900">
+        <div className="flex w-[75%] flex-col items-center justify-start gap-2">
+          <h1 className="text-md w-full text-left font-bold">{title}</h1>
+          <h1 className="w-full text-left text-sm">{subtitle}</h1>
         </div>
-        <div className="flex items-end justify-end w-[20%] h-full">
+        <div className="flex h-full w-[20%] items-end justify-end">
           <Link href={github} target="_blank">
             <FaGithub className="text-2xl" />
           </Link>
