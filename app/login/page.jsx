@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 export default function LoginPage() {
+  const session = useSession();
+  console.log(session);
   return (
     <div className="login-page relative flex h-screen items-center justify-center">
       <Image
