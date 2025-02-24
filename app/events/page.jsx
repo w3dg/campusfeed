@@ -12,21 +12,21 @@ const events = [
     eventPoster: 'EventDemo1.svg',
     eventName: 'KODESPHERE - The Flagship Event',
     eventLocation: 'Campus-13',
-    eventDate: 'Sat-29-Mar',
+    eventDate: 'Sat-29-Mar-2025',
     eventPrize: 200.0,
   },
   {
     eventPoster: 'EventDemo2.svg',
     eventName: 'SPOTLIGHT - The Flagship Event',
     eventLocation: 'Campus-14',
-    eventDate: 'Sat-25-Mar',
+    eventDate: 'Sat-25-Mar-2025',
     eventPrize: 300.0,
   },
   {
     eventPoster: 'EventDemo3.svg',
     eventName: 'STEP IT UP - The Flagship Event',
     eventLocation: 'Campus-15',
-    eventDate: 'Sat-25-Mar',
+    eventDate: 'Sat-25-Mar-2025',
     eventPrize: 400.0,
   },
 ]
@@ -90,21 +90,67 @@ export default function Home() {
     }
     
     // Apply date filter if date range is set
-    if (selectedFilter === 2 && dateRange?.start && dateRange?.end) {
-      console.log("Date Sorting");
-    
-      const startDate = new Date(dateRange?.start?.year, dateRange?.start?.month - 1, dateRange?.start?.day);
-      const endDate = new Date(dateRange?.end?.year, dateRange?.end?.month - 1, dateRange?.end?.day);
-    
-      if(dateRange.start && dateRange.end){result = result.filter(event => {
-        let eventDate = new Date(event.eventDate);
-        
-        return eventDate >= startDate && eventDate <= endDate;
-      });
+// Apply date filter if date range is set
+if (selectedFilter === 2 && dateRange?.start && dateRange?.end) {
+  console.log("Date Sorting");
+
+  const startDate = new Date(dateRange.start.year, dateRange.start.month - 1, dateRange.start.day);
+  const endDate = new Date(dateRange.end.year, dateRange.end.month - 1, dateRange.end.day);
+
+  result = result.filter(event => {
+    let eventDate = new Date(event.eventDate);
+    // Ensure eventDate is a valid date
+    if (isNaN(eventDate.getTime())) {
+      console.warn("Invalid eventDate:", event.eventDate);
+      return false; // Skip invalid dates
     }
-    
-      console.log("Filtered Events:", result);
+
+    console.log("Event date", eventDate)
+
+    const startYear = startDate.getFullYear();
+    const startMonth = startDate.getMonth();
+    const startDay = startDate.getDate();
+    const endYear = endDate.getFullYear();
+    const endMonth = endDate.getMonth();
+    const endDay = endDate.getDate();
+
+    let eventYear = eventDate.getFullYear();
+    let eventMonth = eventDate.getMonth();
+    let eventDay = eventDate.getDate();
+
+    console.log("startYear", startYear)
+    console.log("startMonth", startMonth)
+    console.log("startDay", startDay)
+    console.log("endYear", endYear)
+    console.log("endMonth", endMonth)
+    console.log("endDay", endDay)
+    console.log("eventYear", eventYear)
+    console.log("eventMonth", eventMonth)
+    console.log("eventDay", endDay)
+
+    if((eventYear < startYear ||  eventYear > endYear )){
+      console.log("Reject due year", event.eventName)
+      return false
     }
+
+    if((eventMonth < startMonth ||  eventMonth > endMonth )){
+      console.log("Reject due mont", event.eventName)
+      return false
+    }
+
+    if((eventDay < startDay ||  eventDay > endDay )){
+      console.log("Reject due date", event.eventName)
+      return false
+    }
+
+    // Compare only the date part (ignoring time differences)
+    return true;
+  });
+
+  console.log("Filtered Events:", result);
+}
+
+
     
     
     // Apply sorting
