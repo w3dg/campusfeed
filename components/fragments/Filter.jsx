@@ -6,13 +6,8 @@ import { Slider } from "@heroui/slider";
 import { DateRangePicker } from "@heroui/date-picker";
 import { Select, SelectItem } from "@heroui/select";
 
-const indianStates = [
-  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
-  "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
-  "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
-  "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
-  "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
-  "Uttar Pradesh", "Uttarakhand", "West Bengal"
+const locations = [
+ "Campus-15", "Campus-14", "Campus-13", "Campus-12", "Campus-8"
 ];
 
 const Filter = ({ filterOpen, setFilterOpen, setSortOpen, filterOptions, setSelectedFilter, selectedFilter, priceRange, setPriceRange, dateRange, setDateRange, selectedLocations, setSelectedLocations }) => {
@@ -20,19 +15,22 @@ const Filter = ({ filterOpen, setFilterOpen, setSortOpen, filterOptions, setSele
   // Handle slider value change
   const handlePriceChange = (value) => {
     setPriceRange(value);
-    console.log("Selected Price Range:", value);
   };
 
-  // Handle date range change
   const handleDateChange = (range) => {
-    setDateRange(new Date(range.start), new Date(range.end));
-    console.log("Selected Date Range:", new Date(range.end), new Date(range.start));
+    if (!range || !range.start || !range.end) {
+      console.error("Invalid range received:", range);
+      return;
+    }
+    console.log(range)
+    setDateRange(range)
+  
   };
+  
 
   // Handle location selection change
   const handleLocationChange = (selected) => {
-    setSelectedLocations(selected);
-    console.log("Selected Locations:",indianStates[selected.target.value]);
+    setSelectedLocations(locations[selected?.target?.value]);
   };
 
   return (
@@ -98,7 +96,7 @@ const Filter = ({ filterOpen, setFilterOpen, setSortOpen, filterOptions, setSele
                 <DateRangePicker
                   className="max-w-xs"
                   label="Select your range"
-                  value={dateRange}
+                  value={dateRange} 
                   onChange={handleDateChange}
                 />
               )}
@@ -107,15 +105,15 @@ const Filter = ({ filterOpen, setFilterOpen, setSortOpen, filterOptions, setSele
               {selectedFilter === 1 && (
                 <Select
                   label="Select Location"
-                  placeholder="Choose states"
+                  placeholder="Choose campus"
                   multiple
                   value={selectedLocations}
                   onChange={handleLocationChange}
                   className="min-w-[200px]"
                 >
-                  {indianStates.map((state, index) => (
-                    <SelectItem key={index} value={state}>
-                      {state}
+                  {locations.map((location, index) => (
+                    <SelectItem key={index} value={location}>
+                      {location}
                     </SelectItem>
                   ))}
                 </Select>

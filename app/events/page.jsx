@@ -40,30 +40,22 @@ export default function Home() {
   const filterOptions = ['Prize', 'Location', 'Date']
   const [selectedFilter, setSelectedFilter] = useState(-1)
   const [priceRange, setPriceRange] = useState([100, 500])
-  const [dateRange, setDateRange] = useState({
-    start: null,
-    end: null
-  })
+  const [dateRange, setDateRange] = useState(null)
   const [selectedLocations, setSelectedLocations] = useState(-1)
   const [searchQuery, setSearchQuery] = useState('')
-  
-  // State for filtered events
   const [filteredEvents, setFilteredEvents] = useState(events)
 
   // Parse date string to timestamp for comparison
   const parseDateString = (dateStr) => {
-    // Format is "Sat-29-Mar"
     const parts = dateStr.split('-')
     const day = parseInt(parts[1])
     const month = parts[2]
     
-    // Map month abbreviation to month number
     const monthMap = {
       'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5, 
       'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
     }
     
-    // Use current year for simplicity
     const date = new Date(new Date().getFullYear(), monthMap[month], day)
     return date.getTime()
   }
@@ -82,38 +74,38 @@ export default function Home() {
     }
     
     // Apply price range filter
-    if (selectedFilter === 0 || selectedFilter === -1) {
+    if (selectedFilter === 0) {
       result = result.filter(event => 
         event.eventPrize >= priceRange[0] && event.eventPrize <= priceRange[1]
       )
-      console.log("Applying Price Filter", result)
     }
     
     // Apply location filter if locations are selected
-    if (selectedFilter === 1 && selectedLocations !== -1) {
+    if (selectedFilter === 1) {
+     if(selectedLocations !== -1){
       result = result.filter(event => 
-        selectedLocations === event.eventLocation
+        event.eventLocation === selectedLocations
       )
-      console.log("Applying Location Filter", result)
+     }
     }
     
-    // Apply date filter if date range is set TODO
-    if ((selectedFilter === 2 || selectedFilter === -1) && (dateRange.start || dateRange.end)) {
-      result = result.filter(event => {
-        const eventTimestamp = parseDateString(event.eventDate)
+    // Apply date filter if date range is set
+    if (selectedFilter === 2 && dateRange?.start && dateRange?.end) {
+      console.log("Date Sorting");
+    
+      const startDate = new Date(dateRange?.start?.year, dateRange?.start?.month - 1, dateRange?.start?.day);
+      const endDate = new Date(dateRange?.end?.year, dateRange?.end?.month - 1, dateRange?.end?.day);
+    
+      if(dateRange.start && dateRange.end){result = result.filter(event => {
+        let eventDate = new Date(event.eventDate);
         
-        if (dateRange.start && dateRange.end) {
-          console.log("Event Date", new Date(event[0].eventDate))
-        }
-         else if (dateRange.start) {
-          return eventTimestamp >= dateRange.start.getTime()
-        } else if (dateRange.end) {
-          return eventTimestamp <= dateRange.end.getTime()
-        }
-        
-        return true
-      })
+        return eventDate >= startDate && eventDate <= endDate;
+      });
     }
+    
+      console.log("Filtered Events:", result);
+    }
+    
     
     // Apply sorting
     if (sortBy === 0) {
@@ -252,9 +244,6 @@ export default function Home() {
         </header>
         {/* Event Cards */}
         <div className="mt-3 2xl:mt-6 px-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 md:gap-x-4 gap-y-10 relative">
-          {/* <div className="fixed w-[20%] h-[40%]  bg-[#b9eec966] blur-2xl rounded-full -z-10 -left-[2%] top-[40%] pointer-events-none"></div>
-          <div className="fixed w-[20%] h-[40%] bg-[#b9eec966] blur-2xl rounded-full -z-10 -right-[5%] top-[20%] pointer-events-none"></div> */}
-
           {filteredEvents.length > 0 ? (
             filteredEvents.map((event, index) => (
               <EventCard event={event} key={index} />
