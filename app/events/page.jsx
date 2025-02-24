@@ -4,6 +4,8 @@ import NavBar from '@/components/fragments/NavBar'
 import Image from 'next/image'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Filter from '@/components/fragments/Filter'
+import SortBy from '@/components/fragments/SortBy'
 
 const events = [
   {
@@ -92,16 +94,15 @@ const events = [
   },
 ]
 
-const highToLow = events.sort((a, b) => b.eventPrize - a.eventPrize)
-const newestFirst = events.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate))
-
-const sortedEvents = [highToLow, newestFirst]
 
 export default function Home() {
   const [search, setSearch] = useState(false)
   const [filterOpen, setFilterOpen] = useState(false)
   const [sortOpen, setSortOpen] = useState(false)
   const [sortBy, setSortBy] = useState(0)
+  const sortOptions = ['Prize: High to Low', 'Newest First']
+  const filterOptions = ['Prize', 'Location', 'Date']
+  const [selectedFilter, setSelectedFilter] = useState(-1)
 
   return (
     <>
@@ -111,89 +112,10 @@ export default function Home() {
           <p className="text-[40px]">Events</p>
           <div className="gap-2 text-sm hidden md:flex items-center z-10">
             {/* Filter Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => {
-                  setFilterOpen(!filterOpen)
-                  setSortOpen(false)
-                }}
-                className="bg-[#6DA27D] rounded-md p-2 text-white"
-              >
-                Filter{' '}
-                <Image
-                  src={'Dropdown.svg'}
-                  alt={'Dropdown'}
-                  width={10}
-                  height={10}
-                  className="inline"
-                ></Image>
-              </button>
-              <AnimatePresence>
-                {filterOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute bg-white shadow-lg rounded-md p-3 w-40 mt-1"
-                  >
-                    <p className="text-sm font-semibold">Filter By:</p>
-                    <ul className="mt-1 space-y-2">
-                      <li className="hover:bg-gray-100 p-1 rounded-md cursor-pointer">
-                        Prize
-                      </li>
-                      <li className="hover:bg-gray-100 p-1 rounded-md cursor-pointer">
-                        Location
-                      </li>
-                      <li className="hover:bg-gray-100 p-1 rounded-md cursor-pointer">
-                        Date
-                      </li>
-                    </ul>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            <Filter filterOpen={filterOpen} setFilterOpen={setFilterOpen} setSortOpen={setSortOpen} filterOptions={filterOptions} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter}/>
 
             {/* Sort By Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => {
-                  setSortOpen(!sortOpen)
-                  setFilterOpen(false)
-                }}
-                className="bg-[#6DA27D] rounded-md p-2 text-white flex items-center gap-1"
-              >
-                Sort By
-                <Image
-                  src={'Dropdown.svg'}
-                  alt={'Dropdown'}
-                  width={10}
-                  height={10}
-                  className="inline"
-                ></Image>
-              </button>
-              <AnimatePresence>
-                {sortOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute bg-white shadow-lg rounded-md p-3 w-40 mt-1"
-                  >
-                    <p className="text-sm font-semibold">Sort By:</p>
-                    <ul className="mt-1 space-y-2">         
-                      <li className={`  p-1 pl-2 rounded-md cursor-pointer ${sortBy === 0 ? 'bg-[#6DA27D]  text-white' : ' text-black hover:bg-gray-100'}`} onClick={() => setSortBy(0)}>
-                        Prize: High to Low
-                      </li>
-                      <li className={` p-1 pl-2 rounded-md cursor-pointer ${sortBy === 1 ? 'bg-[#6DA27D] text-white' : ' text-black hover:bg-gray-100 '}`} onClick={() => setSortBy(1)}>
-                        Date: Newest First
-                      </li>
-                    </ul>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            <SortBy filterOpen={filterOpen} setFilterOpen={setFilterOpen} sortOpen={sortOpen} setSortOpen={setSortOpen} sortOptions={sortOptions} sortBy={sortBy} setSortBy={setSortBy}/>
 
             {/* Search Bar */}
             <div className="flex gap-1 items-center bg-[#D3DEE3] px-3 py-2 rounded-md min-w-[250px]">
@@ -281,7 +203,7 @@ export default function Home() {
           <div className="fixed w-[20%] h-[40%]  bg-[#b9eec966] blur-2xl rounded-full -z-10 -left-[2%] top-[40%] pointer-events-none"></div>
           <div className="fixed w-[20%] h-[40%] bg-[#b9eec966] blur-2xl rounded-full -z-10 -right-[5%] top-[20%] pointer-events-none"></div>
 
-          {sortedEvents[sortBy].map((event, index) => (
+          {events.map((event, index) => (
             <EventCard event={event} key={index} />
           ))}
         </div>
