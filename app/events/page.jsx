@@ -97,14 +97,12 @@ export default function Home() {
       console.log("Applying Location Filter", result)
     }
     
-    // Apply date filter if date range is set
+    // Apply date filter if date range is set TODO
     if ((selectedFilter === 2 || selectedFilter === -1) && (dateRange.start || dateRange.end)) {
       result = result.filter(event => {
         const eventTimestamp = parseDateString(event.eventDate)
         
-        console.log("not IF")
         if (dateRange.start && dateRange.end) {
-          console.log("IF")
           console.log("Event Date", new Date(event[0].eventDate))
         }
          else if (dateRange.start) {
