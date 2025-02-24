@@ -44,7 +44,7 @@ export default function Home() {
     start: null,
     end: null
   })
-  const [selectedLocations, setSelectedLocations] = useState([])
+  const [selectedLocations, setSelectedLocations] = useState(-1)
   const [searchQuery, setSearchQuery] = useState('')
   
   // State for filtered events
@@ -86,13 +86,15 @@ export default function Home() {
       result = result.filter(event => 
         event.eventPrize >= priceRange[0] && event.eventPrize <= priceRange[1]
       )
+      console.log("Applying Price Filter", result)
     }
     
     // Apply location filter if locations are selected
-    if ((selectedFilter === 1 || selectedFilter === -1) && selectedLocations && selectedLocations.length > 0) {
+    if (selectedFilter === 1 && selectedLocations !== -1) {
       result = result.filter(event => 
-        selectedLocations.includes(event.eventLocation)
+        selectedLocations === event.eventLocation
       )
+      console.log("Applying Location Filter", result)
     }
     
     // Apply date filter if date range is set
