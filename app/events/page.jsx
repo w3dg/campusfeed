@@ -192,7 +192,6 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredEvents, setFilteredEvents] = useState(events);
 
-  // Parse date string to timestamp for comparison
   const parseDateString = (dateStr) => {
     const parts = dateStr.split("-");
     const day = parseInt(parts[1]);
@@ -217,7 +216,6 @@ export default function Home() {
     return date.getTime();
   };
 
-  // Apply filters and sorting whenever relevant state changes
   useEffect(() => {
     let result = [...events];
 
@@ -266,10 +264,9 @@ export default function Home() {
 
       result = result.filter((event) => {
         let eventDate = new Date(event.eventDate);
-        // Ensure eventDate is a valid date
         if (isNaN(eventDate.getTime())) {
           console.warn("Invalid eventDate:", event.eventDate);
-          return false; // Skip invalid dates
+          return false;
         }
 
         console.log("Event date", eventDate);
@@ -284,16 +281,6 @@ export default function Home() {
         let eventYear = eventDate.getFullYear();
         let eventMonth = eventDate.getMonth();
         let eventDay = eventDate.getDate();
-
-        console.log("startYear", startYear);
-        console.log("startMonth", startMonth);
-        console.log("startDay", startDay);
-        console.log("endYear", endYear);
-        console.log("endMonth", endMonth);
-        console.log("endDay", endDay);
-        console.log("eventYear", eventYear);
-        console.log("eventMonth", eventMonth);
-        console.log("eventDay", endDay);
 
         if (eventYear < startYear || eventYear > endYear) {
           console.log("Reject due year", event.eventName);
@@ -310,11 +297,8 @@ export default function Home() {
           return false;
         }
 
-        // Compare only the date part (ignoring time differences)
         return true;
       });
-
-      console.log("Filtered Events:", result);
     }
 
     // Apply sorting
