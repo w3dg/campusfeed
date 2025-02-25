@@ -61,7 +61,7 @@ const Filter = ({ filterOpen, setFilterOpen, setSortOpen, filterOptions, setSele
             className="absolute bg-white shadow-lg rounded-md p-3 min-w-40 mt-1"
           >
             <p className="text-sm font-semibold">Filter By:</p>
-            <ul className="mt-1 space-y-2">
+            <ul className="mt-1 space-y-2 pb-2">
               {filterOptions.map((filter, index) => (
                 <li
                   key={index}
@@ -118,6 +118,11 @@ const Filter = ({ filterOpen, setFilterOpen, setSortOpen, filterOptions, setSele
                   ))}
                 </Select>
               )}
+              {
+                selectedFilter !== -1 && (
+                  <button className='text-white relative bg-[#6DA27D] left-[37%] top-1 tracking-wide p-1 px-3 rounded-2xl  hover:bg-[#84ba95]' onClick={()=>setSelectedFilter(-1)}>clear</button>
+                )
+              }
             </ul>
           </motion.div>
         )}
