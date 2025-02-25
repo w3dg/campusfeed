@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroui/date-picker": "^2.3.13",
     "@heroui/react": "^2.6.14",
+    "@heroui/system": "^2.4.10",
+    "@heroui/theme": "^2.4.9",
     "framer-motion": "^12.0.11",
     "heroui-cli": "^1.0.0",
     "next": "15.1.6",
