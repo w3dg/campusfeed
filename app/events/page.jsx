@@ -460,7 +460,7 @@ export default function Home() {
           </AnimatePresence>
         </header>
         {/* Event Cards */}
-        <div className="relative mt-3 grid grid-cols-2 gap-x-2 gap-y-10 px-0 md:grid-cols-3 md:gap-x-4 lg:grid-cols-4 2xl:mt-6 z-10">
+        <div className="relative z-0 mt-3 grid grid-cols-2 gap-x-2 gap-y-10 px-0 md:grid-cols-3 md:gap-x-4 lg:grid-cols-4 2xl:mt-6">
           <div className="pointer-events-none fixed -left-[4%] top-[40%] -z-10 h-[40%] w-[20%] rounded-full bg-[#b9eec966] blur-2xl"></div>
           <div className="pointer-events-none fixed -right-[5%] top-[20%] -z-10 h-[40%] w-[20%] rounded-full bg-[#b9eec966] blur-2xl"></div>
           {filteredEvents.length > 0 ? (
