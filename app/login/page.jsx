@@ -7,8 +7,11 @@ export default function LoginPage() {
   const session = useSession();
   console.log(session);
   return (
-    <div className="login-page relative flex h-screen items-center justify-center">
-      <Image
+    <div
+      id="login-page"
+      className="relative flex h-screen items-center justify-center bg-gradient-to-br from-[#e8f5e9] via-[#e3f2fd] to-[#f3e5f5]"
+    >
+      {/*<Image
         src="/ellipse.svg"
         alt="Ellipse"
         width={200}
@@ -21,8 +24,8 @@ export default function LoginPage() {
         width={200}
         height={200}
         className="absolute bottom-0 right-0 w-80 sm:w-[500px]"
-      />
-      <div className="flex w-[400px] flex-col items-center rounded-2xl border border-gray-200 bg-white p-8 shadow-md">
+      />*/}
+      <div className="flex w-[450px] flex-col items-center rounded-2xl border border-gray-200 bg-white p-8 shadow-md">
         <Image
           src="/images/campus_feed_logo.svg"
           alt="Campus Feed"

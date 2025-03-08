@@ -50,7 +50,10 @@ const PublisherPage = () => {
   const { handleChange, handleSubmit } = detailsForm();
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#e8f5e9] via-[#e3f2fd] to-[#f3e5f5] px-2 py-10">
+    <div
+      id="publisher-page"
+      className="min-h-screen w-full bg-gradient-to-br from-[#e8f5e9] via-[#e3f2fd] to-[#f3e5f5] px-2 py-10"
+    >
       <Card className="mx-auto w-full max-w-4xl items-center justify-center rounded-2xl bg-[#fcfdfd] p-6 shadow-2xl backdrop-blur-sm">
         <Form onSubmit={handleSubmit}>
           <CardHeader className="items-center space-x-2 divide-x-2 divide-[#6DA27D]">
