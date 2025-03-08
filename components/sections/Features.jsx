@@ -16,7 +16,7 @@ export function FeatureCard({ id, title, description, icon }) {
           height={60}
           width={60}
           alt="icon"
-          className="border-1 mb-4 shrink-0 rounded-2xl border-[#8690b1] bg-gradient-to-tr from-[#8690b1] to-transparent fill-white object-contain p-3 shadow-inner"
+          className="mb-4 shrink-0 rounded-2xl border-1 border-[#8690b1] bg-gradient-to-tr from-[#8690b1] to-transparent fill-white object-contain p-3 shadow-inner"
         />
         <span className="font-semibold">FEATURE {id}</span>
       </div>
@@ -60,7 +60,7 @@ export default function Features() {
           alt="ellipse"
           width={1440}
           height={578}
-          className="right-[calc(50%-11rem)] z-50 aspect-square w-[36.125rem] translate-x-[100%] opacity-50 sm:right-[calc(50%-45rem)] sm:w-[60.1875rem]"
+          className="right-[calc(50%-11rem)] aspect-square w-[36.125rem] translate-x-[100%] opacity-50 sm:right-[calc(50%-45rem)] sm:w-[60.1875rem]"
         />
       </div>
       <div className="py-24 sm:py-32">

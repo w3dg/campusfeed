@@ -329,7 +329,7 @@ export default function Home() {
       <NavBar />
       <section className="relative mx-auto max-w-6xl px-4 py-20 md:w-[80%] lg:w-[75%] lg:px-0">
         <header className="flex items-center justify-between">
-          <p className="text-[40px]">Events</p>
+          <h2 className="text-[40px]">Events</h2>
           <div className="z-10 hidden items-center gap-2 text-sm md:flex">
             {/* Filter Dropdown */}
             <Filter
