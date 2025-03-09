@@ -16,7 +16,7 @@ export function FeatureCard({ id, title, description, icon }) {
           height={60}
           width={60}
           alt="icon"
-          className="mb-4 shrink-0 rounded-2xl border-1 border-[#8690b1] bg-gradient-to-tr from-[#8690b1] to-transparent fill-white object-contain p-3 shadow-inner"
+          className="mb-4 shrink-0 rounded-2xl border-2 border-[#8690b1] fill-white object-contain p-3 shadow-inner"
         />
         <span className="font-semibold">FEATURE {id}</span>
       </div>
