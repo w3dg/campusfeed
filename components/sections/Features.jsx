@@ -53,7 +53,7 @@ export default function Features() {
     >
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-visible blur-3xl sm:-top-96"
+        className="absolute inset-x-0 -top-60 -z-10 transform-gpu overflow-visible blur-3xl sm:-top-8"
       >
         <Image
           src="/ellipse.svg"
@@ -85,7 +85,7 @@ export default function Features() {
       </div>
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-40rem)]"
+        className="absolute inset-x-0 top-[calc(100%-23rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-60rem)]"
       >
         <Image
           src="/ellipse.svg"
