@@ -41,7 +41,7 @@ const EventModal = ({ isModalOpen, selectedEvent, closeModal }) => {
             </motion.button>
 
             {/* Event content */}
-            <div className="flex min-w-fit flex-col gap-2 lg:flex-row lg:gap-6">
+            <div className="flex min-w-fit flex-col items-center gap-2 md:flex-row md:gap-6">
               <motion.div
                 initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -95,7 +95,7 @@ const EventModal = ({ isModalOpen, selectedEvent, closeModal }) => {
                 </p>
 
                 <motion.button
-                  className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#6DA27D] p-3 text-center font-semibold text-white hover:bg-[#6DA27D]/90 lg:mt-5 lg:w-fit"
+                  className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#6DA27D] p-3 text-center font-semibold text-white hover:bg-[#6DA27D]/90 md:mt-2 lg:mt-5 lg:w-fit"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
