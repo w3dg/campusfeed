@@ -13,22 +13,41 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRef } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import { formatISO } from "date-fns";
+import { parseAbsoluteToLocal } from "@internationalized/date";
 import { EventSchema } from "../../lib/schema";
 
 const PublisherForm = () => {
   const formRef = useRef(null);
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(EventSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      position: "",
+      email: "",
+      phone: "",
+      title: "",
+      school: "",
+      venue: "",
+      startDate: "",
+      endDate: "",
+      socialLinks: "",
+      registrationLinks: "",
+      image: "",
+      description: "",
+    },
   });
 
-  console.log({ errors });
   const onSubmit = (data) => {
-    console.log({ data });
+    console.log(errors);
+    console.log("submitted", data);
   };
 
   return (
@@ -121,26 +140,89 @@ const PublisherForm = () => {
               variant="bordered"
               isRequired
             />
-            <DatePicker
-              {...register("startDate", {
-                valueAsDate: true,
-              })}
-              isRequired
+
+            {/* DateInput isnt compatible with register, we wrap it in our own controlled input */}
+
+            <Controller
               name="startDate"
-              label="Start date"
-              variant="bordered"
+              control={control}
+              rules={{ required: "Date is required" }}
+              render={({ field }) => {
+                return (
+                  <DatePicker
+                    variant="bordered"
+                    hideTimeZone
+                    granularity="day"
+                    isInvalid={!!errors.date}
+                    label="Start Date"
+                    // render with ZonedDateTime
+                    value={
+                      field.value
+                        ? parseAbsoluteToLocal(
+                            new Date(field.value).toISOString(),
+                          )
+                        : null
+                    }
+                    // on change, convert to iso 8601 format yyyy-mm-dd for form value
+                    onChange={(date) => {
+                      if (!date) {
+                        field.onChange(null);
+                        return;
+                      }
+                      const nativeDate = date.toDate(); // Native Javascript Date
+                      // set actual form value to iso 8601 format yyyy-mm-dd
+                      const formattedString = formatISO(nativeDate, {
+                        representation: "date",
+                      });
+                      field.onChange(formattedString);
+                    }}
+                  />
+                );
+              }}
             />
-            <DatePicker
-              {...register("endDate", {
-                valueAsDate: true,
-              })}
-              isRequired
+
+            <Controller
               name="endDate"
-              label="End date"
-              variant="bordered"
+              control={control}
+              rules={{ required: "Date is required" }}
+              render={({ field }) => {
+                return (
+                  <DatePicker
+                    variant="bordered"
+                    hideTimeZone
+                    granularity="day"
+                    isInvalid={!!errors.date}
+                    label="End Date"
+                    // render with ZonedDateTime
+                    value={
+                      field.value
+                        ? parseAbsoluteToLocal(
+                            new Date(field.value).toISOString(),
+                          )
+                        : null
+                    }
+                    // on change, convert to iso 8601 format yyyy-mm-dd for form value
+                    onChange={(date) => {
+                      if (!date) {
+                        field.onChange(null);
+                        return;
+                      }
+                      const nativeDate = date.toDate(); // Native Javascript Date
+                      // set actual form value to iso 8601 format yyyy-mm-dd
+                      const formattedString = formatISO(nativeDate, {
+                        representation: "date",
+                      });
+                      field.onChange(formattedString);
+                    }}
+                  />
+                );
+              }}
             />
+
             <Input
-              {...register("socialLinks")}
+              {...register("socialLinks", {
+                required: false,
+              })}
               type="text"
               name="socialLinks"
               label="Social Media Link"
