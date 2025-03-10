@@ -9,36 +9,27 @@ import {
   Input,
   Textarea,
 } from "@heroui/react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { redirect } from "next/navigation";
 import { useRef } from "react";
+import { useForm } from "react-hook-form";
 import { EventSchema } from "../../lib/schema";
 
 const PublisherForm = () => {
   const formRef = useRef(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(EventSchema),
+  });
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    const formData = new FormData(formRef.current);
-    const data = Object.fromEntries(formData);
-    data["socialLinks"] =
-      data["socialLinks"].trim().length !== 0 ? data["socialLinks"] : undefined;
-
-    console.log(data);
-
-    // Validate on client before submitting
-    const eventSubmission = EventSchema.safeParse(data);
-    if (!eventSubmission.success) {
-      console.log(eventSubmission.error.errors);
-      return;
-    } else {
-      console.log("Validated", eventSubmission.data);
-    }
-
-    // Send request to server
-  }
+  console.log({ errors });
+  const onSubmit = (data) => {
+    console.log({ data });
+  };
 
   return (
     <div
@@ -46,7 +37,7 @@ const PublisherForm = () => {
       className="min-h-screen w-full bg-gradient-to-br from-[#e8f5e9] via-[#e3f2fd] to-[#f3e5f5] px-2 py-10"
     >
       <Card className="mx-auto w-full max-w-4xl items-center justify-center rounded-2xl bg-[#fcfdfd] p-6 shadow-2xl backdrop-blur-sm">
-        <Form ref={formRef} onSubmit={handleSubmit}>
+        <Form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
           <CardHeader className="items-center space-x-2 divide-x-2 divide-[#6DA27D]">
             <Image
               src="navlogo.svg"
@@ -61,6 +52,7 @@ const PublisherForm = () => {
           <Divider className="mb-4 bg-[#6DA27D]" />
           <div className="mb-4 grid w-full grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <Input
+              {...register("firstName")}
               type="text"
               name="firstName"
               label="First Name"
@@ -68,6 +60,7 @@ const PublisherForm = () => {
               isRequired
             />
             <Input
+              {...register("lastName")}
               type="text"
               name="lastName"
               label="Last Name"
@@ -75,6 +68,7 @@ const PublisherForm = () => {
               isRequired
             />
             <Input
+              {...register("position")}
               type="text"
               name="position"
               label="Position"
@@ -82,6 +76,7 @@ const PublisherForm = () => {
               isRequired
             />
             <Input
+              {...register("phone")}
               type="text"
               name="phone"
               label="Phone Number"
@@ -89,6 +84,7 @@ const PublisherForm = () => {
               isRequired
             />
             <Input
+              {...register("email")}
               type="email"
               name="email"
               label="Email ID"
@@ -102,6 +98,7 @@ const PublisherForm = () => {
           <Divider className="mb-4 bg-[#6DA27D]" />
           <div className="mb-4 grid w-full grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <Input
+              {...register("title")}
               type="text"
               name="title"
               label="Event Title"
@@ -109,6 +106,7 @@ const PublisherForm = () => {
               isRequired
             />
             <Input
+              {...register("school")}
               type="text"
               name="school"
               label="Organising School/Society"
@@ -116,6 +114,7 @@ const PublisherForm = () => {
               isRequired
             />
             <Input
+              {...register("venue")}
               type="text"
               name="venue"
               label="Venue"
@@ -123,18 +122,25 @@ const PublisherForm = () => {
               isRequired
             />
             <DatePicker
+              {...register("startDate", {
+                valueAsDate: true,
+              })}
               isRequired
               name="startDate"
               label="Start date"
               variant="bordered"
             />
             <DatePicker
+              {...register("endDate", {
+                valueAsDate: true,
+              })}
               isRequired
               name="endDate"
               label="End date"
               variant="bordered"
             />
             <Input
+              {...register("socialLinks")}
               type="text"
               name="socialLinks"
               label="Social Media Link"
@@ -143,6 +149,7 @@ const PublisherForm = () => {
           </div>
           <div className="mb-4 grid w-full grid-cols-1 gap-8 lg:grid-cols-1">
             <Input
+              {...register("registrationLinks")}
               type="text"
               name="registrationLinks"
               label="Registration Link"
@@ -150,6 +157,7 @@ const PublisherForm = () => {
               isRequired
             />
             <Input
+              {...register("image")}
               type="url"
               name="image"
               label="Poster Image URL"
@@ -157,6 +165,7 @@ const PublisherForm = () => {
               isRequired
             />
             <Textarea
+              {...register("description")}
               name="description"
               label="Description"
               variant="bordered"
@@ -182,9 +191,9 @@ const PublisherForm = () => {
 const PublisherPage = () => {
   const session = useSession();
 
-  if (session.status === "unauthenticated") {
-    redirect("/login");
-  }
+  // if (session.status === "unauthenticated") {
+  //   redirect("/login");
+  // }
 
   return <PublisherForm />;
 };
