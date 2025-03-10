@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
+import Image from "next/image";
 
 export default function LoginPage() {
   const session = useSession();
@@ -37,7 +37,11 @@ export default function LoginPage() {
         <p className="text-xs text-gray-400">Your events in Campus Feed</p>
 
         <button
-          onClick={() => signIn("google")}
+          onClick={() =>
+            signIn("google", {
+              callbackUrl: "/",
+            })
+          }
           className="login mt-6 flex w-full items-center justify-center rounded-md py-2 text-black shadow-md hover:opacity-90"
         >
           <Image
