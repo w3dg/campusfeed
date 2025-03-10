@@ -45,9 +45,51 @@ const PublisherForm = () => {
     },
   });
 
+  console.log(errors);
+
   const onSubmit = (data) => {
     console.log(errors);
     console.log("submitted", data);
+  };
+
+  const ControlledDatePicker = ({ name: formInputName, label }) => {
+    return (
+      <Controller
+        name={formInputName}
+        control={control}
+        rules={{ required: "Date is required" }}
+        render={({ field }) => {
+          return (
+            <DatePicker
+              variant="bordered"
+              hideTimeZone
+              granularity="day"
+              isInvalid={!!errors.date}
+              label={label}
+              // render with ZonedDateTime
+              value={
+                field.value
+                  ? parseAbsoluteToLocal(new Date(field.value).toISOString())
+                  : null
+              }
+              // on change, convert to iso 8601 format yyyy-mm-dd for form value
+              onChange={(date) => {
+                if (!date) {
+                  field.onChange(null);
+                  return;
+                }
+                const nativeDate = date.toDate(); // Native Javascript Date
+                // set actual form value to iso 8601 format yyyy-mm-dd
+                const formattedString = formatISO(nativeDate, {
+                  representation: "date",
+                });
+                field.onChange(formattedString);
+              }}
+            />
+          );
+        }}
+      />
+    );
   };
 
   return (
@@ -143,81 +185,8 @@ const PublisherForm = () => {
 
             {/* DateInput isnt compatible with register, we wrap it in our own controlled input */}
 
-            <Controller
-              name="startDate"
-              control={control}
-              rules={{ required: "Date is required" }}
-              render={({ field }) => {
-                return (
-                  <DatePicker
-                    variant="bordered"
-                    hideTimeZone
-                    granularity="day"
-                    isInvalid={!!errors.date}
-                    label="Start Date"
-                    // render with ZonedDateTime
-                    value={
-                      field.value
-                        ? parseAbsoluteToLocal(
-                            new Date(field.value).toISOString(),
-                          )
-                        : null
-                    }
-                    // on change, convert to iso 8601 format yyyy-mm-dd for form value
-                    onChange={(date) => {
-                      if (!date) {
-                        field.onChange(null);
-                        return;
-                      }
-                      const nativeDate = date.toDate(); // Native Javascript Date
-                      // set actual form value to iso 8601 format yyyy-mm-dd
-                      const formattedString = formatISO(nativeDate, {
-                        representation: "date",
-                      });
-                      field.onChange(formattedString);
-                    }}
-                  />
-                );
-              }}
-            />
-
-            <Controller
-              name="endDate"
-              control={control}
-              rules={{ required: "Date is required" }}
-              render={({ field }) => {
-                return (
-                  <DatePicker
-                    variant="bordered"
-                    hideTimeZone
-                    granularity="day"
-                    isInvalid={!!errors.date}
-                    label="End Date"
-                    // render with ZonedDateTime
-                    value={
-                      field.value
-                        ? parseAbsoluteToLocal(
-                            new Date(field.value).toISOString(),
-                          )
-                        : null
-                    }
-                    // on change, convert to iso 8601 format yyyy-mm-dd for form value
-                    onChange={(date) => {
-                      if (!date) {
-                        field.onChange(null);
-                        return;
-                      }
-                      const nativeDate = date.toDate(); // Native Javascript Date
-                      // set actual form value to iso 8601 format yyyy-mm-dd
-                      const formattedString = formatISO(nativeDate, {
-                        representation: "date",
-                      });
-                      field.onChange(formattedString);
-                    }}
-                  />
-                );
-              }}
-            />
+            <ControlledDatePicker name={"startDate"} label={"Start Date"} />
+            <ControlledDatePicker name={"endDate"} label={"End Date"} />
 
             <Input
               {...register("socialLinks", {
