@@ -9,11 +9,13 @@ import {
   Input,
   Textarea,
 } from "@heroui/react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import { useRef } from "react";
 import { EventSchema } from "../../lib/schema";
 
-const PublisherPage = () => {
+const PublisherForm = () => {
   const formRef = useRef(null);
 
   async function handleSubmit(event) {
@@ -175,6 +177,16 @@ const PublisherPage = () => {
       </Card>
     </div>
   );
+};
+
+const PublisherPage = () => {
+  const session = useSession();
+
+  if (session.status === "unauthenticated") {
+    redirect("/login");
+  }
+
+  return <PublisherForm />;
 };
 
 export default PublisherPage;
