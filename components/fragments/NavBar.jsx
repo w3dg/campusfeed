@@ -39,7 +39,13 @@ const NavBar = () => {
             return (
               <Link
                 key={item}
-                href={item === "Events" ? "/events" : linkPath}
+                href={
+                  item === "Events"
+                    ? "/events"
+                    : item === "Publisher"
+                      ? "/publisher"
+                      : linkPath
+                }
                 className="rounded-md px-2 py-1 transition-colors duration-200 hover:bg-[#bdc9d0] hover:bg-opacity-90"
               >
                 {item}
