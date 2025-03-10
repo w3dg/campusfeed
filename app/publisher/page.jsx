@@ -1,53 +1,61 @@
 "use client";
-
+import { useRef } from "react";
 import {
   Button,
   Card,
   CardHeader,
   DateRangePicker,
+  DatePicker,
   Divider,
   Form,
   Input,
   Textarea,
 } from "@heroui/react";
 import Image from "next/image";
-import { useState } from "react";
-import { FaUpload } from "react-icons/fa";
-
-export const detailsForm = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    position: "",
-    email: "",
-    phone: "",
-    title: "",
-    school: "",
-    venue: "",
-    startDate: "",
-    endDate: "",
-    socialLinks: "",
-    registrationLinks: "",
-    description: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-  };
-
-  return { handleChange, handleSubmit };
-};
+import { EventSchema } from "../../lib/schema";
 
 const PublisherPage = () => {
-  const { handleChange, handleSubmit } = detailsForm();
+  const formRef = useRef(null);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    console.log(event);
+
+    const formData = new FormData(formRef.current);
+
+    const data = {
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      position: formData.get("position"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      title: formData.get("title"),
+      school: formData.get("school"),
+      venue: formData.get("venue"),
+      startDate: formData.get("startDate"),
+      endDate: formData.get("endDate"),
+      socialLinks:
+        formData.get("socialLinks").trim().length !== 0
+          ? formData.get("socialLinks")
+          : undefined,
+      registrationLinks: formData.get("registrationLinks"),
+      image: formData.get("image"),
+      description: formData.get("description"),
+    };
+
+    console.log(data);
+
+    // Validate on client before submitting
+    const eventSubmission = EventSchema.safeParse(data);
+    if (!eventSubmission.success) {
+      console.log(eventSubmission.error.errors);
+      return;
+    } else {
+      console.log("Validated", eventSubmission.data);
+    }
+
+    // Send request to server
+  }
 
   return (
     <div
@@ -55,7 +63,7 @@ const PublisherPage = () => {
       className="min-h-screen w-full bg-gradient-to-br from-[#e8f5e9] via-[#e3f2fd] to-[#f3e5f5] px-2 py-10"
     >
       <Card className="mx-auto w-full max-w-4xl items-center justify-center rounded-2xl bg-[#fcfdfd] p-6 shadow-2xl backdrop-blur-sm">
-        <Form onSubmit={handleSubmit}>
+        <Form ref={formRef} onSubmit={handleSubmit}>
           <CardHeader className="items-center space-x-2 divide-x-2 divide-[#6DA27D]">
             <Image
               src="navlogo.svg"
@@ -74,7 +82,6 @@ const PublisherPage = () => {
               name="firstName"
               label="First Name"
               variant="bordered"
-              onChange={handleChange}
               isRequired
             />
             <Input
@@ -82,7 +89,6 @@ const PublisherPage = () => {
               name="lastName"
               label="Last Name"
               variant="bordered"
-              onChange={handleChange}
               isRequired
             />
             <Input
@@ -90,7 +96,6 @@ const PublisherPage = () => {
               name="position"
               label="Position"
               variant="bordered"
-              onChange={handleChange}
               isRequired
             />
             <Input
@@ -98,7 +103,6 @@ const PublisherPage = () => {
               name="phone"
               label="Phone Number"
               variant="bordered"
-              onChange={handleChange}
               isRequired
             />
             <Input
@@ -106,7 +110,6 @@ const PublisherPage = () => {
               name="email"
               label="Email ID"
               variant="bordered"
-              onChange={handleChange}
               className="sm:col-span-2"
               isRequired
             />
@@ -120,7 +123,6 @@ const PublisherPage = () => {
               name="title"
               label="Event Title"
               variant="bordered"
-              onChange={handleChange}
               isRequired
             />
             <Input
@@ -128,7 +130,6 @@ const PublisherPage = () => {
               name="school"
               label="Organising School/Society"
               variant="bordered"
-              onChange={handleChange}
               isRequired
             />
             <Input
@@ -136,40 +137,40 @@ const PublisherPage = () => {
               name="venue"
               label="Venue"
               variant="bordered"
-              onChange={handleChange}
               isRequired
             />
-            <DateRangePicker
-              name="duration"
-              label="Start Date - End Date"
-              variant="bordered"
-              onChange={handleChange}
+            <DatePicker
               isRequired
+              name="startDate"
+              label="Start date"
+              variant="bordered"
+            />
+            <DatePicker
+              isRequired
+              name="endDate"
+              label="End date"
+              variant="bordered"
             />
             <Input
               type="text"
-              name="socialLink"
+              name="socialLinks"
               label="Social Media Link"
               variant="bordered"
-              onChange={handleChange}
-            />
-            <Input
-              type="text"
-              name="registrationLink"
-              label="Registration Link"
-              variant="bordered"
-              onChange={handleChange}
-              isRequired
             />
           </div>
           <div className="mb-4 grid w-full grid-cols-1 gap-8 lg:grid-cols-1">
             <Input
+              type="text"
+              name="registrationLinks"
+              label="Registration Link"
+              variant="bordered"
+              isRequired
+            />
+            <Input
               type="url"
               name="image"
-              label="Upload Image URL"
+              label="Poster Image URL"
               variant="bordered"
-              icon={<FaUpload />}
-              onChange={handleChange}
               isRequired
             />
             <Textarea
@@ -177,7 +178,6 @@ const PublisherPage = () => {
               label="Description"
               variant="bordered"
               isRequired
-              onChange={handleChange}
               rows="4"
             />
           </div>
