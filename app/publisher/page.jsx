@@ -1,10 +1,8 @@
 "use client";
-import { useRef } from "react";
 import {
   Button,
   Card,
   CardHeader,
-  DateRangePicker,
   DatePicker,
   Divider,
   Form,
@@ -12,6 +10,7 @@ import {
   Textarea,
 } from "@heroui/react";
 import Image from "next/image";
+import { useRef } from "react";
 import { EventSchema } from "../../lib/schema";
 
 const PublisherPage = () => {
@@ -19,29 +18,11 @@ const PublisherPage = () => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log(event);
 
     const formData = new FormData(formRef.current);
-
-    const data = {
-      firstName: formData.get("firstName"),
-      lastName: formData.get("lastName"),
-      position: formData.get("position"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      title: formData.get("title"),
-      school: formData.get("school"),
-      venue: formData.get("venue"),
-      startDate: formData.get("startDate"),
-      endDate: formData.get("endDate"),
-      socialLinks:
-        formData.get("socialLinks").trim().length !== 0
-          ? formData.get("socialLinks")
-          : undefined,
-      registrationLinks: formData.get("registrationLinks"),
-      image: formData.get("image"),
-      description: formData.get("description"),
-    };
+    const data = Object.fromEntries(formData);
+    data["socialLinks"] =
+      data["socialLinks"].trim().length !== 0 ? data["socialLinks"] : undefined;
 
     console.log(data);
 
