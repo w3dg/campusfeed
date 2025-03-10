@@ -7,8 +7,13 @@ import HamburgerMenu from "./HamburgerMenu";
 
 const NavBar = () => {
   const session = useSession();
-  console.log(session);
-  const navLinks = ["Home", "Events", "Features", "About", "Contact Us"];
+  const navLinks = [
+    "Home",
+    session.status === "unauthenticated" ? "Events" : "Publisher",
+    "Features",
+    "About",
+    "Contact Us",
+  ];
   const path = usePathname().split("/")[1];
 
   return (
@@ -27,7 +32,7 @@ const NavBar = () => {
           .filter((item) => !(path === "events" && item === "Features"))
           .map((item) => {
             const linkPath =
-              path === "events"
+              path === "events" || path === "publisher"
                 ? `/#${item.toLocaleLowerCase()}`
                 : `#${item.toLowerCase()}`;
 
