@@ -1,13 +1,15 @@
 "use client";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
-import HamburgerMenu from "./HamburgerMenu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import HamburgerMenu from "./HamburgerMenu";
 
 const NavBar = () => {
+  const session = useSession();
+  console.log(session);
   const navLinks = ["Home", "Events", "Features", "About", "Contact Us"];
   const path = usePathname().split("/")[1];
-  console.log(path);
 
   return (
     <nav className="fixed top-0 z-20 flex w-full items-center justify-between bg-white p-4 lg:px-16">
@@ -41,8 +43,10 @@ const NavBar = () => {
           })}
       </div>
       <button className="ml-4 hidden rounded-lg bg-[#6DA27D] px-4 py-2 text-white transition-all duration-200 hover:scale-105 hover:shadow-lg lg:block">
-        <Link href={path === "events" ? "/logout" : "/login"}>
-          {path === "events" ? "Logout" : "Register"}
+        <Link
+          href={session.status === "unauthenticated" ? "/login" : "/logout"}
+        >
+          {session.status === "unauthenticated" ? "Register" : "Logout"}
         </Link>
       </button>
       <HamburgerMenu navLinks={navLinks} path={path} />
