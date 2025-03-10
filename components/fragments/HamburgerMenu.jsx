@@ -1,22 +1,23 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import Image from 'next/image'
-import Link from 'next/link'
+import { AnimatePresence, motion } from "framer-motion";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 const HamburgerMenu = ({ navLinks, path }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const session = useSession();
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <div className="relative lg:hidden">
       <motion.button
-        className="relative w-[30px] h-[30px] z-50 flex items-center justify-center"
+        className="relative z-50 flex h-[30px] w-[30px] items-center justify-center"
         onClick={toggleMenu}
         aria-expanded={isMenuOpen}
-        aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         whileTap={{ scale: 0.97 }}
       >
         <AnimatePresence mode="wait" initial={false}>
@@ -30,7 +31,7 @@ const HamburgerMenu = ({ navLinks, path }) => {
               transition={{ duration: 0.2 }}
             >
               <Image
-                src={'/CloseMenu.svg'}
+                src={"/CloseMenu.svg"}
                 width={30}
                 height={30}
                 alt="Close Menu"
@@ -47,7 +48,7 @@ const HamburgerMenu = ({ navLinks, path }) => {
               transition={{ duration: 0.2 }}
             >
               <Image
-                src={'/Hamburger.svg'}
+                src={"/Hamburger.svg"}
                 width={20}
                 height={20}
                 alt="Hamburger Menu"
@@ -61,7 +62,7 @@ const HamburgerMenu = ({ navLinks, path }) => {
         {isMenuOpen && (
           <>
             <motion.div
-              className="fixed inset-0 bg-black/20 z-40"
+              className="fixed inset-0 z-40 bg-black/20"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -71,35 +72,42 @@ const HamburgerMenu = ({ navLinks, path }) => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2, ease: 'easeInOut' }}
-              className="absolute top-12 right-0 bg-white shadow-lg rounded-lg p-4 w-48 flex flex-col z-50 gap-1"
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="absolute right-0 top-12 z-50 flex w-48 flex-col gap-1 rounded-lg bg-white p-4 shadow-lg"
             >
               {navLinks
-          .filter((item) => !(path === "events" && item === "Features")) 
-          .map((item) => {
-            const linkPath = path === "events" ? `/#${item.toLocaleLowerCase()}` : `#${item.toLowerCase()}`;
+                .filter((item) => !(path === "events" && item === "Features"))
+                .map((item) => {
+                  const linkPath =
+                    path === "events"
+                      ? `/#${item.toLocaleLowerCase()}`
+                      : `#${item.toLowerCase()}`;
 
-            return (
-              <Link
-                key={item}
-                href={item === "Events" ? "/events" : linkPath} 
-                className="rounded-md px-2 py-1 transition-colors duration-200 hover:bg-[#bdc9d0] hover:bg-opacity-90"
-              >
-                {item}
-              </Link>
-            );
-          })}
-              <button className="bg-[#6DA27D] w-[60%] ml-2 my-1 rounded-md py-1 text-white">
-              <Link href={path === "events" ? "/logout" : "/login"}>
-          {path === "events" ? "Logout" : "Register"}
-        </Link>
+                  return (
+                    <Link
+                      key={item}
+                      href={item === "Events" ? "/events" : linkPath}
+                      className="rounded-md px-2 py-1 transition-colors duration-200 hover:bg-[#bdc9d0] hover:bg-opacity-90"
+                    >
+                      {item}
+                    </Link>
+                  );
+                })}
+              <button className="my-1 ml-2 w-[60%] rounded-md bg-[#6DA27D] py-1 text-white">
+                <Link
+                  href={
+                    session.status === "unauthenticated" ? "/login" : "/logout"
+                  }
+                >
+                  {session.status === "unauthenticated" ? "Register" : "Logout"}
+                </Link>
               </button>
             </motion.nav>
           </>
         )}
       </AnimatePresence>
     </div>
-  )
-}
+  );
+};
 
-export default HamburgerMenu
+export default HamburgerMenu;
