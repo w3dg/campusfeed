@@ -10,13 +10,16 @@ import {
   Textarea,
 } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  getLocalTimeZone,
+  parseAbsoluteToLocal,
+  today,
+} from "@internationalized/date";
+import { formatISO } from "date-fns";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRef } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { formatISO } from "date-fns";
-import { parseAbsoluteToLocal } from "@internationalized/date";
-import { getLocalTimeZone, today } from "@internationalized/date";
+import { Controller, useForm } from "react-hook-form";
 import { EventSchema } from "../../lib/schema";
 
 const PublisherForm = () => {
@@ -65,7 +68,10 @@ const PublisherForm = () => {
               variant="bordered"
               hideTimeZone
               granularity="day"
-              isInvalid={!!errors.date}
+              isInvalid={
+                !!(label === "Start Date" ? errors.startDate : errors.endDate)
+              }
+              errorMessage={`Pick a valid ${label}`}
               label={label}
               minValue={today(getLocalTimeZone())}
               // render with ZonedDateTime
@@ -121,6 +127,8 @@ const PublisherForm = () => {
               label="First Name"
               variant="bordered"
               isRequired
+              isInvalid
+              errorMessage="Enter a valid First Name"
             />
             <Input
               {...register("lastName")}
@@ -129,6 +137,8 @@ const PublisherForm = () => {
               label="Last Name"
               variant="bordered"
               isRequired
+              isInvalid
+              errorMessage="Enter a valid Last Name"
             />
             <Input
               {...register("position")}
@@ -137,6 +147,8 @@ const PublisherForm = () => {
               label="Position"
               variant="bordered"
               isRequired
+              isInvalid
+              errorMessage="Enter a valid Position"
             />
             <Input
               {...register("phone")}
@@ -145,6 +157,8 @@ const PublisherForm = () => {
               label="Phone Number"
               variant="bordered"
               isRequired
+              isInvalid
+              errorMessage="Enter a valid Phone Number"
             />
             <Input
               {...register("email")}
@@ -154,6 +168,8 @@ const PublisherForm = () => {
               variant="bordered"
               className="sm:col-span-2"
               isRequired
+              isInvalid
+              errorMessage="Enter a valid Email"
             />
           </div>
 
@@ -167,6 +183,8 @@ const PublisherForm = () => {
               label="Event Title"
               variant="bordered"
               isRequired
+              isInvalid
+              errorMessage="Enter a valid Title"
             />
             <Input
               {...register("school")}
@@ -175,6 +193,8 @@ const PublisherForm = () => {
               label="Organising School/Society"
               variant="bordered"
               isRequired
+              isInvalid
+              errorMessage="Enter a valid School/Society"
             />
             <Input
               {...register("venue")}
@@ -183,6 +203,8 @@ const PublisherForm = () => {
               label="Venue"
               variant="bordered"
               isRequired
+              isInvalid
+              errorMessage="Enter a valid Venue"
             />
 
             {/* DateInput isnt compatible with register, we wrap it in our own controlled input */}
@@ -198,6 +220,8 @@ const PublisherForm = () => {
               name="socialLinks"
               label="Social Media Link"
               variant="bordered"
+              isInvalid
+              errorMessage="Enter a valid Social Media Link"
             />
           </div>
           <div className="mb-4 grid w-full grid-cols-1 gap-8 lg:grid-cols-1">
@@ -208,6 +232,8 @@ const PublisherForm = () => {
               label="Registration Link"
               variant="bordered"
               isRequired
+              isInvalid
+              errorMessage="Enter a valid Registration Link"
             />
             <Input
               {...register("image")}
@@ -216,6 +242,8 @@ const PublisherForm = () => {
               label="Poster Image URL"
               variant="bordered"
               isRequired
+              isInvalid
+              errorMessage="Enter a valid Image URL"
             />
             <Textarea
               {...register("description")}
@@ -224,6 +252,8 @@ const PublisherForm = () => {
               variant="bordered"
               isRequired
               rows="4"
+              isInvalid
+              errorMessage="Enter a valid Description"
             />
           </div>
           <Divider className="mb-4 bg-[#6DA27D]" />
