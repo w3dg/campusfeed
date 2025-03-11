@@ -1,5 +1,5 @@
 import React from "react";
-import { Download, X } from "lucide-react";
+import { Download, Link, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
@@ -63,44 +63,49 @@ const EventModal = ({ isModalOpen, selectedEvent, closeModal }) => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                <p className="my-1 text-[18px] font-semibold leading-[21px]">
+                <p className="my-1 text-[18px] font-bold leading-[21px]">
                   {selectedEvent.eventName}
                 </p>
 
-                <p className="my-1 font-medium">
+                <p className="my-1 font-semibold">
                   Date:{" "}
-                  <span className="opacity-[70%]">
+                  <span className="font-normal opacity-[70%]">
                     {formatEventDate(selectedEvent.eventDate)}
                   </span>
                 </p>
 
-                <p className="my-1 font-medium">
+                <p className="my-1 font-semibold">
                   Venue:{" "}
-                  <span className="opacity-[70%]">
+                  <span className="font-normal opacity-[70%]">
                     {selectedEvent.eventLocation}
                   </span>
                 </p>
 
-                <p className="my-1 font-medium">
+                <p className="my-1 font-semibold">
                   Prize Pool:{" "}
-                  <span className="opacity-[70%]">
+                  <span className="font-normal opacity-[70%]">
                     ₹{selectedEvent.eventPrize.toFixed(2)}
                   </span>
                 </p>
 
-                <p className="my-1 font-medium">Description</p>
+                <p className="my-1 font-semibold">Description</p>
                 <p className="mb-1 text-sm font-medium leading-[15px] opacity-[70%]">
                   {selectedEvent.eventDescription ||
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."}
                 </p>
+                <div className="mt-1 flex space-x-4">
+                  <motion.button className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#6DA27D] p-3 text-center font-semibold text-white hover:bg-[#6DA27D]/90 md:mt-2 lg:mt-5 lg:w-fit">
+                    Register Link <Link className="h-5 w-5" />
+                  </motion.button>
 
-                <motion.button
-                  className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#6DA27D] p-3 text-center font-semibold text-white hover:bg-[#6DA27D]/90 md:mt-2 lg:mt-5 lg:w-fit"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Download PDF <Download className="h-5 w-5" />
-                </motion.button>
+                  <motion.button
+                    className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#6DA27D] p-3 text-center font-semibold text-white hover:bg-[#6DA27D]/90 md:mt-2 lg:mt-5 lg:w-fit"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Download PDF <Download className="h-5 w-5" />
+                  </motion.button>
+                </div>
               </motion.div>
             </div>
           </motion.div>
