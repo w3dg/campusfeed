@@ -67,7 +67,6 @@ const PublisherForm = () => {
               granularity="day"
               isInvalid={!!errors.date}
               label={label}
-              defaultValue={today(getLocalTimeZone()).subtract({ days: 1 })}
               minValue={today(getLocalTimeZone())}
               // render with ZonedDateTime
               value={
