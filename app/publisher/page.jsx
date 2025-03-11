@@ -16,6 +16,7 @@ import { useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { formatISO } from "date-fns";
 import { parseAbsoluteToLocal } from "@internationalized/date";
+import { getLocalTimeZone, today } from "@internationalized/date";
 import { EventSchema } from "../../lib/schema";
 
 const PublisherForm = () => {
@@ -66,6 +67,8 @@ const PublisherForm = () => {
               granularity="day"
               isInvalid={!!errors.date}
               label={label}
+              defaultValue={today(getLocalTimeZone()).subtract({ days: 1 })}
+              minValue={today(getLocalTimeZone())}
               // render with ZonedDateTime
               value={
                 field.value
