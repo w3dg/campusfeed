@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Filter from "@/components/fragments/Filter";
 import SortBy from "@/components/fragments/SortBy";
 
+import EventModal from "@/components/fragments/EventModal";
+
 const events = [
   {
     eventPoster: "EventDemo1.svg",
@@ -191,6 +193,18 @@ export default function Home() {
   const [selectedLocations, setSelectedLocations] = useState(-1);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredEvents, setFilteredEvents] = useState(events);
+
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (event) => {
+    setSelectedEvent(event);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const parseDateString = (dateStr) => {
     const parts = dateStr.split("-");
@@ -449,7 +463,13 @@ export default function Home() {
           <div className="pointer-events-none fixed -right-[5%] top-[20%] -z-10 h-[40%] w-[20%] rounded-full bg-[#b9eec966] blur-2xl"></div>
           {filteredEvents.length > 0 ? (
             filteredEvents.map((event, index) => (
-              <EventCard event={event} key={index} />
+              <div
+                className="cursor-pointer"
+                key={index}
+                onClick={() => openModal(event)}
+              >
+                <EventCard event={event} key={index} />
+              </div>
             ))
           ) : (
             <div className="col-span-full py-8 text-center">
@@ -457,6 +477,12 @@ export default function Home() {
             </div>
           )}
         </div>
+
+        <EventModal
+          isModalOpen={isModalOpen}
+          selectedEvent={selectedEvent}
+          closeModal={closeModal}
+        />
       </section>
     </>
   );
