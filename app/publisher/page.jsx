@@ -33,8 +33,6 @@ const PublisherForm = () => {
     resolver: zodResolver(EventSchema),
   });
 
-  console.log({ errors });
-
   const onSubmit = (data) => {
     console.log("submitted", data);
   };
@@ -199,11 +197,24 @@ const PublisherForm = () => {
               {...register("socialLinks", {
                 required: false,
               })}
+              defaultValue=""
+              validate={(value) => {
+                if (!value) return null;
+
+                // check if socialLinks is a valid url
+                const urlRegex =
+                  /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
+
+                if (!urlRegex.test(value)) {
+                  return "Enter a valid Social Media Link";
+                }
+
+                return null;
+              }}
               type="text"
               name="socialLinks"
               label="Social Media Link"
               variant="bordered"
-              isInvalid={!!errors.socialLinks}
               errorMessage="Enter a valid Social Media Link"
             />
           </div>
