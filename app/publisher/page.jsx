@@ -31,28 +31,11 @@ const PublisherForm = () => {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(EventSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      position: "",
-      email: "",
-      phone: "",
-      title: "",
-      school: "",
-      venue: "",
-      startDate: "",
-      endDate: "",
-      socialLinks: "",
-      registrationLinks: "",
-      image: "",
-      description: "",
-    },
   });
 
-  console.log(errors);
+  console.log({ errors });
 
   const onSubmit = (data) => {
-    console.log(errors);
     console.log("submitted", data);
   };
 
@@ -127,7 +110,7 @@ const PublisherForm = () => {
               label="First Name"
               variant="bordered"
               isRequired
-              isInvalid
+              isInvalid={!!errors.firstName}
               errorMessage="Enter a valid First Name"
             />
             <Input
@@ -137,7 +120,7 @@ const PublisherForm = () => {
               label="Last Name"
               variant="bordered"
               isRequired
-              isInvalid
+              isInvalid={!!errors.lastName}
               errorMessage="Enter a valid Last Name"
             />
             <Input
@@ -147,7 +130,7 @@ const PublisherForm = () => {
               label="Position"
               variant="bordered"
               isRequired
-              isInvalid
+              isInvalid={!!errors.position}
               errorMessage="Enter a valid Position"
             />
             <Input
@@ -157,7 +140,7 @@ const PublisherForm = () => {
               label="Phone Number"
               variant="bordered"
               isRequired
-              isInvalid
+              isInvalid={!!errors.phone}
               errorMessage="Enter a valid Phone Number"
             />
             <Input
@@ -168,7 +151,7 @@ const PublisherForm = () => {
               variant="bordered"
               className="sm:col-span-2"
               isRequired
-              isInvalid
+              isInvalid={!!errors.email}
               errorMessage="Enter a valid Email"
             />
           </div>
@@ -183,7 +166,7 @@ const PublisherForm = () => {
               label="Event Title"
               variant="bordered"
               isRequired
-              isInvalid
+              isInvalid={!!errors.title}
               errorMessage="Enter a valid Title"
             />
             <Input
@@ -193,7 +176,7 @@ const PublisherForm = () => {
               label="Organising School/Society"
               variant="bordered"
               isRequired
-              isInvalid
+              isInvalid={!!errors.school}
               errorMessage="Enter a valid School/Society"
             />
             <Input
@@ -203,7 +186,7 @@ const PublisherForm = () => {
               label="Venue"
               variant="bordered"
               isRequired
-              isInvalid
+              isInvalid={!!errors.venue}
               errorMessage="Enter a valid Venue"
             />
 
@@ -220,7 +203,7 @@ const PublisherForm = () => {
               name="socialLinks"
               label="Social Media Link"
               variant="bordered"
-              isInvalid
+              isInvalid={!!errors.socialLinks}
               errorMessage="Enter a valid Social Media Link"
             />
           </div>
@@ -232,7 +215,7 @@ const PublisherForm = () => {
               label="Registration Link"
               variant="bordered"
               isRequired
-              isInvalid
+              isInvalid={!!errors.registrationLinks}
               errorMessage="Enter a valid Registration Link"
             />
             <Input
@@ -242,7 +225,7 @@ const PublisherForm = () => {
               label="Poster Image URL"
               variant="bordered"
               isRequired
-              isInvalid
+              isInvalid={!!errors.image}
               errorMessage="Enter a valid Image URL"
             />
             <Textarea
@@ -252,7 +235,7 @@ const PublisherForm = () => {
               variant="bordered"
               isRequired
               rows="4"
-              isInvalid
+              isInvalid={!!errors.description}
               errorMessage="Enter a valid Description"
             />
           </div>
