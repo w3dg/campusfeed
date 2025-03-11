@@ -11,8 +11,10 @@ import {
   Textarea,
 } from "@heroui/react";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaUpload } from "react-icons/fa";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export const detailsForm = () => {
   const [formData, setFormData] = useState({
@@ -48,6 +50,18 @@ export const detailsForm = () => {
 
 const PublisherPage = () => {
   const { handleChange, handleSubmit } = detailsForm();
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [status, router]);
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div

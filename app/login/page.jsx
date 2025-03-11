@@ -2,10 +2,26 @@
 
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
+// import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function LoginPage() {
-  const session = useSession();
-  console.log(session);
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && status === "authenticated") {
+      window.location.href = "/events";
+    }
+  }, [status]);
+
+  const handleLogin = async () => {
+    await signIn("google", { callbackUrl: "/events" });
+  };
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div
       id="login-page"
@@ -37,7 +53,7 @@ export default function LoginPage() {
         <p className="text-xs text-gray-400">Your events in Campus Feed</p>
 
         <button
-          onClick={() => signIn("google")}
+          onClick={handleLogin}
           className="login mt-6 flex w-full items-center justify-center rounded-md py-2 text-black shadow-md hover:opacity-90"
         >
           <Image
