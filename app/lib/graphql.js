@@ -1,6 +1,20 @@
 import fetch from "cross-fetch";
 
-export function sendAPIRequest(requestQuery) {
+/**
+ * Send GraphQL query to HyGraph API
+ * Example requestQuery:
+  query getNextUserByEmail($email:String!){
+    nextUser(where:{email:$email}){
+      firstname
+      lastname
+      email
+      posts{
+        title
+      }
+    }
+ * Docs: https://hygraph.com/blog/nextjs-graphql
+ */
+export function sendGraphQlRequest(requestQuery) {
   const headers = {
     "content-type": "application/json",
     Authorization: `${process.env.HYGRAPH_TOKEN}`,
