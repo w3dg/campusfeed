@@ -9,7 +9,7 @@ const NavBar = () => {
   const session = useSession();
   const navLinks = [
     "Home",
-    session.status === "unauthenticated" ? "Events" : "Publisher",
+    session.status === "unauthenticated" ? "Events" : "Publish",
     "Features",
     "About",
     "Contact Us",
