@@ -1,8 +1,13 @@
 "use client";
 
+<<<<<<< HEAD
 import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect } from "react";
+=======
+import { signIn, useSession } from "next-auth/react";
+import Image from "next/image";
+>>>>>>> origin/master
 
 export default function LoginPage() {
   const { data: session, status } = useSession();
@@ -70,7 +75,15 @@ export default function LoginPage() {
         <p className="text-xs text-gray-400">Your events in Campus Feed</p>
 
         <button
+<<<<<<< HEAD
           onClick={handleLogin}
+=======
+          onClick={() =>
+            signIn("google", {
+              callbackUrl: "/",
+            })
+          }
+>>>>>>> origin/master
           className="login mt-6 flex w-full items-center justify-center rounded-md py-2 text-black shadow-md hover:opacity-90"
         >
           <Image

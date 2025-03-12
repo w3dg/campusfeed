@@ -5,7 +5,7 @@ export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
-      clinetSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
   session: {
