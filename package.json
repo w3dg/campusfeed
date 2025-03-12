@@ -16,6 +16,8 @@
     "cross-fetch": "^4.1.0",
     "framer-motion": "^12.0.11",
     "heroui-cli": "^1.0.0",
+    "lucide-react": "^0.479.0",
+    "motion": "^12.5.0",
     "next": "15.1.6",
     "next-auth": "^4.24.11",
     "react": "^19.0.0",
