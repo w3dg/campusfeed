@@ -58,20 +58,6 @@ export default function LoginPage() {
       id="login-page"
       className="relative flex h-screen items-center justify-center bg-gradient-to-br from-[#e8f5e9] via-[#e3f2fd] to-[#f3e5f5]"
     >
-      {/*<Image
-        src="/ellipse.svg"
-        alt="Ellipse"
-        width={200}
-        height={200}
-        className="absolute left-0 top-0 w-80 sm:w-[500px]"
-      />
-      <Image
-        src="/ellipse.svg"
-        alt="Ellipse"
-        width={200}
-        height={200}
-        className="absolute bottom-0 right-0 w-80 sm:w-[500px]"
-      />*/}
       <div className="flex w-[450px] flex-col items-center rounded-2xl border border-gray-200 bg-white p-8 shadow-md">
         <Image
           src="/images/campus_feed_logo.svg"
