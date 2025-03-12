@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { signIn, useSession } from "next-auth/react";
-// import { useRouter } from "next/router";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect } from "react";
 
 export default function LoginPage() {
@@ -18,8 +17,40 @@ export default function LoginPage() {
     await signIn("google", { callbackUrl: "/events" });
   };
 
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: "/" });
+  };
+
   if (status === "loading") {
     return <div>Loading...</div>;
+  }
+
+  if (status === "authenticated") {
+    return (
+      <div
+        id="login-page"
+        className="relative flex h-screen items-center justify-center bg-gradient-to-br from-[#e8f5e9] via-[#e3f2fd] to-[#f3e5f5]"
+      >
+        <div className="flex w-[450px] flex-col items-center rounded-2xl border border-gray-200 bg-white p-8 shadow-md">
+          <Image
+            src="/images/campus_feed_logo.svg"
+            alt="Campus Feed"
+            width={200}
+            height={200}
+            className="mb-6"
+          />
+          <p className="mt-1 text-sm text-gray-500">
+            Logged in as {session.user.email}
+          </p>
+          <button
+            onClick={handleLogout}
+            className="login mt-6 flex w-full items-center justify-center rounded-md py-2 text-black shadow-md hover:opacity-90"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
