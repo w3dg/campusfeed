@@ -18,6 +18,7 @@ const query = `query EventData {
     contactNumber
     emailId
     registrationLink
+    guideLinePdfLink
     relationToUser
   }
 }`;
@@ -47,6 +48,7 @@ export async function getEvents() {
 
       eventDescription: record.description.html,
       registrationLink: record.registrationLink,
+      guideLinePdfLink: record.guideLinePdfLink,
     };
   });
 

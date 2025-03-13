@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Download, Link, X } from "lucide-react";
 import Image from "next/image";
 import NextLink from "next/link";
+import { redirect } from "next/navigation";
 
 const EventModal = ({ isModalOpen, selectedEvent, closeModal }) => {
   const formatEventDate = (dateStr) => {
@@ -111,6 +112,9 @@ const EventModal = ({ isModalOpen, selectedEvent, closeModal }) => {
                     className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#6DA27D] p-3 text-center font-semibold text-white hover:bg-[#6DA27D]/90 md:mt-2 lg:mt-5 lg:w-fit"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      redirect(selectedEvent?.guideLinePdfLink ?? "#");
+                    }}
                   >
                     Download PDF <Download className="h-5 w-5" />
                   </motion.button>
