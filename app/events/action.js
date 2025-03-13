@@ -33,7 +33,15 @@ export async function getEvents() {
       eventPoster: "EventDemo1.svg", //record.posterImage,
       eventName: record.title,
       eventLocation: record.venue,
-      eventDate: new Date(record.start).toString(),
+      eventDate: new Date(record.start)
+        .toLocaleString("en-GB", {
+          weekday: "short",
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        })
+        .replace(",", "")
+        .replaceAll(" ", "-"),
       eventPrize: 200.0,
 
       eventDescription: record.description.html,
