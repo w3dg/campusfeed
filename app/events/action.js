@@ -1,176 +1,47 @@
 "use server";
 
-const events = [
-  {
-    eventPoster: "EventDemo1.svg",
-    eventName: "KODESPHERE - The Flagship Event",
-    eventLocation: "Campus-13",
-    eventDate: "Sat-29-Mar-2025",
-    eventPrize: 200.0,
-  },
-  {
-    eventPoster: "EventDemo2.svg",
-    eventName: "SPOTLIGHT - The Flagship Event",
-    eventLocation: "Campus-14",
-    eventDate: "Sat-25-Mar-2025",
-    eventPrize: 300.0,
-  },
-  {
-    eventPoster: "EventDemo3.svg",
-    eventName: "STEP IT UP - The Flagship Event",
-    eventLocation: "Campus-15",
-    eventDate: "Sat-25-Mar-2025",
-    eventPrize: 400.0,
-  },
-  {
-    eventPoster: "EventDemo1.svg",
-    eventName: "KODESPHERE - The Flagship Event",
-    eventLocation: "Campus-13",
-    eventDate: "Sat-29-Mar-2025",
-    eventPrize: 200.0,
-  },
-  {
-    eventPoster: "EventDemo2.svg",
-    eventName: "SPOTLIGHT - The Flagship Event",
-    eventLocation: "Campus-14",
-    eventDate: "Sat-25-Mar-2025",
-    eventPrize: 300.0,
-  },
-  {
-    eventPoster: "EventDemo3.svg",
-    eventName: "STEP IT UP - The Flagship Event",
-    eventLocation: "Campus-15",
-    eventDate: "Sat-25-Mar-2025",
-    eventPrize: 400.0,
-  },
-  {
-    eventPoster: "EventDemo1.svg",
-    eventName: "KODESPHERE - The Flagship Event",
-    eventLocation: "Campus-13",
-    eventDate: "Sat-29-Mar-2025",
-    eventPrize: 200.0,
-  },
-  {
-    eventPoster: "EventDemo2.svg",
-    eventName: "SPOTLIGHT - The Flagship Event",
-    eventLocation: "Campus-14",
-    eventDate: "Sat-25-Mar-2025",
-    eventPrize: 300.0,
-  },
-  {
-    eventPoster: "EventDemo3.svg",
-    eventName: "STEP IT UP - The Flagship Event",
-    eventLocation: "Campus-15",
-    eventDate: "Sat-25-Mar-2025",
-    eventPrize: 400.0,
-  },
-  {
-    eventPoster: "EventDemo1.svg",
-    eventName: "KODESPHERE - The Flagship Event",
-    eventLocation: "Campus-13",
-    eventDate: "Sat-29-Mar-2025",
-    eventPrize: 200.0,
-  },
-  {
-    eventPoster: "EventDemo2.svg",
-    eventName: "SPOTLIGHT - The Flagship Event",
-    eventLocation: "Campus-14",
-    eventDate: "Sat-25-Mar-2025",
-    eventPrize: 300.0,
-  },
-  {
-    eventPoster: "EventDemo3.svg",
-    eventName: "STEP IT UP - The Flagship Event",
-    eventLocation: "Campus-15",
-    eventDate: "Sat-25-Mar-2025",
-    eventPrize: 400.0,
-  },
-  {
-    eventPoster: "EventDemo1.svg",
-    eventName: "KODESPHERE - The Flagship Event",
-    eventLocation: "Campus-13",
-    eventDate: "Sat-29-Mar-2025",
-    eventPrize: 200.0,
-  },
-  {
-    eventPoster: "EventDemo2.svg",
-    eventName: "SPOTLIGHT - The Flagship Event",
-    eventLocation: "Campus-14",
-    eventDate: "Sat-25-Mar-2025",
-    eventPrize: 300.0,
-  },
-  {
-    eventPoster: "EventDemo3.svg",
-    eventName: "STEP IT UP - The Flagship Event",
-    eventLocation: "Campus-15",
-    eventDate: "Sat-25-Mar-2025",
-    eventPrize: 400.0,
-  },
-  {
-    eventPoster: "EventDemo1.svg",
-    eventName: "KODESPHERE - The Flagship Event",
-    eventLocation: "Campus-13",
-    eventDate: "Sat-29-Mar-2025",
-    eventPrize: 200.0,
-  },
-  {
-    eventPoster: "EventDemo2.svg",
-    eventName: "SPOTLIGHT - The Flagship Event",
-    eventLocation: "Campus-14",
-    eventDate: "Sat-25-Mar-2025",
-    eventPrize: 300.0,
-  },
-  {
-    eventPoster: "EventDemo3.svg",
-    eventName: "STEP IT UP - The Flagship Event",
-    eventLocation: "Campus-15",
-    eventDate: "Sat-25-Mar-2025",
-    eventPrize: 400.0,
-  },
-  {
-    eventPoster: "EventDemo1.svg",
-    eventName: "KODESPHERE - The Flagship Event",
-    eventLocation: "Campus-13",
-    eventDate: "Sat-29-Mar-2025",
-    eventPrize: 200.0,
-  },
-  {
-    eventPoster: "EventDemo2.svg",
-    eventName: "SPOTLIGHT - The Flagship Event",
-    eventLocation: "Campus-14",
-    eventDate: "Sat-25-Mar-2025",
-    eventPrize: 300.0,
-  },
-  {
-    eventPoster: "EventDemo3.svg",
-    eventName: "STEP IT UP - The Flagship Event",
-    eventLocation: "Campus-15",
-    eventDate: "Sat-25-Mar-2025",
-    eventPrize: 400.0,
-  },
-  {
-    eventPoster: "EventDemo1.svg",
-    eventName: "KODESPHERE - The Flagship Event",
-    eventLocation: "Campus-13",
-    eventDate: "Sat-29-Mar-2025",
-    eventPrize: 200.0,
-  },
-  {
-    eventPoster: "EventDemo2.svg",
-    eventName: "SPOTLIGHT - The Flagship Event",
-    eventLocation: "Campus-14",
-    eventDate: "Sat-25-Mar-2025",
-    eventPrize: 300.0,
-  },
-  {
-    eventPoster: "EventDemo3.svg",
-    eventName: "STEP IT UP - The Flagship Event",
-    eventLocation: "Campus-15",
-    eventDate: "Sat-25-Mar-2025",
-    eventPrize: 400.0,
-  },
-];
+import { sendGraphQlRequest } from "@/lib/graphql";
+
+const query = `query EventData {
+  eventModels {
+    title
+    description {
+      html
+    }
+    posterImage
+    start
+    end
+    venue
+    organizingSchoolOrSociety
+    socialMedia
+    contactNumber
+    emailId
+    registrationLink
+    relationToUser
+  }
+}`;
 
 export async function getEvents() {
+  const response = await sendGraphQlRequest(query);
+  const parsedData = await response.json();
+  const {
+    data: { eventModels },
+  } = parsedData;
+
+  const events = eventModels.map((record) => {
+    return {
+      eventPoster: "EventDemo1.svg", //record.posterImage,
+      eventName: record.title,
+      eventLocation: record.venue,
+      eventDate: new Date(record.start).toString(),
+      eventPrize: 200.0,
+
+      eventDescription: record.description.html,
+      registrationLink: record.registrationLink,
+    };
+  });
+
+  console.log(events);
+
   return { data: events };
 }
