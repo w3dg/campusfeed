@@ -49,7 +49,7 @@ const EventModal = ({ isModalOpen, selectedEvent, closeModal }) => {
                 className="min-w-fit"
               >
                 <Image
-                  src={`/${selectedEvent.eventPoster}`}
+                  src={selectedEvent.eventPoster}
                   height={280}
                   width={280}
                   alt={selectedEvent.eventName}
