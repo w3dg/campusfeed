@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import EventModal from "@/components/fragments/EventModal";
 
 export default function EventsHomePage({ events }) {
-  console.log(events);
   const [search, setSearch] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
   const [sortOpen, setSortOpen] = useState(false);
