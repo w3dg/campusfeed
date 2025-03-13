@@ -5,6 +5,7 @@ import { sendGraphQlRequest } from "@/lib/graphql";
 const query = `query EventData {
   eventModels {
     title
+    eventPrize
     description {
       html
     }
@@ -30,7 +31,7 @@ export async function getEvents() {
 
   const events = eventModels.map((record) => {
     return {
-      eventPoster: "EventDemo1.svg", //record.posterImage,
+      eventPoster: record.posterImage,
       eventName: record.title,
       eventLocation: record.venue,
       eventDate: new Date(record.start)
@@ -42,7 +43,7 @@ export async function getEvents() {
         })
         .replace(",", "")
         .replaceAll(" ", "-"),
-      eventPrize: 200.0,
+      eventPrize: parseFloat(record.eventPrize),
 
       eventDescription: record.description.html,
       registrationLink: record.registrationLink,
