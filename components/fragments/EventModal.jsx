@@ -98,14 +98,14 @@ const EventModal = ({ isModalOpen, selectedEvent, closeModal }) => {
                 <div className="mt-1 flex space-x-4">
                   <motion.button
                     className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#6DA27D] p-3 text-center font-semibold text-white hover:bg-[#6DA27D]/90 md:mt-2 lg:mt-5 lg:w-fit"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={() => {
                       redirect(selectedEvent.registrationLink);
                     }}
                   >
-                    <div className="flex h-5 flex-row gap-2">
-                      Register Link
-                      <Link className="h-5 w-5" />
-                    </div>
+                    Register Link
+                    <Link className="h-5 w-5" />
                   </motion.button>
 
                   <motion.button
