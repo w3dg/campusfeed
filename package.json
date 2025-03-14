@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.13.4",
     "@heroui/date-picker": "^2.3.13",
     "@heroui/react": "^2.6.14",
     "@heroui/system": "^2.4.10",
