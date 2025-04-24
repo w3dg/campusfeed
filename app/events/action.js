@@ -1,34 +1,37 @@
 "use server";
 
-import { sendGraphQlRequest } from "@/lib/graphql";
+import { graphQLclient } from "@/lib/graphql";
+import { gql } from "@apollo/client";
 
-const query = `query EventData {
-  eventModels {
-    title
-    eventPrize
-    description {
-      html
+const GET_EVENTS = gql`
+  query EventData {
+    eventModels {
+      title
+      eventPrize
+      description {
+        html
+      }
+      posterImage
+      start
+      end
+      venue
+      organizingSchoolOrSociety
+      socialMedia
+      contactNumber
+      emailId
+      registrationLink
+      guideLinePdfLink
+      relationToUser
     }
-    posterImage
-    start
-    end
-    venue
-    organizingSchoolOrSociety
-    socialMedia
-    contactNumber
-    emailId
-    registrationLink
-    guideLinePdfLink
-    relationToUser
   }
-}`;
+`;
 
 export async function getEvents() {
-  const response = await sendGraphQlRequest(query);
-  const parsedData = await response.json();
   const {
     data: { eventModels },
-  } = parsedData;
+  } = await graphQLclient.query({
+    query: GET_EVENTS,
+  });
 
   const events = eventModels.map((record) => {
     return {
