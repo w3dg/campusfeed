@@ -18,7 +18,9 @@ import {
 import { formatISO } from "date-fns";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast, Toaster } from "sonner";
 import { EventSchema } from "../../lib/schema";
@@ -96,6 +98,19 @@ const PublisherForm = () => {
     );
   };
 
+  return { handleChange, handleSubmit };
+};
+
+const PublisherPage = () => {
+  const { handleChange, handleSubmit } = detailsForm();
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [status, router]);
   return (
     <>
       <Toaster richColors position="top-center" />
@@ -312,14 +327,14 @@ const PublisherForm = () => {
   );
 };
 
-const PublisherPage = () => {
-  const session = useSession();
+// const PublisherPage = () => {
+//   const session = useSession();
 
-  // if (session.status === "unauthenticated") {
-  //   redirect("/login");
-  // }
+//   // if (session.status === "unauthenticated") {
+//   //   redirect("/login");
+//   // }
 
-  return <PublisherForm />;
-};
+//   return <PublisherForm />;
+// };
 
 export default PublisherPage;
