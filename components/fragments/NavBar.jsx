@@ -6,15 +6,16 @@ import { usePathname } from "next/navigation";
 import HamburgerMenu from "./HamburgerMenu";
 
 const NavBar = () => {
+  const { data: session, status } = useSession();
+
   const navLinks = [
     "Home",
-    session.status === "unauthenticated" ? "Events" : "Publish",
+    status === "unauthenticated" ? "Events" : "Publish",
     "Features",
     "About",
     "Contact Us",
   ];
   const path = usePathname().split("/")[1];
-  const { data: session, status } = useSession();
 
   return (
     <nav className="fixed top-0 z-20 flex w-full items-center justify-between bg-white p-4 lg:px-16">
@@ -54,10 +55,8 @@ const NavBar = () => {
           })}
       </div>
       <button className="ml-4 hidden rounded-lg bg-[#6DA27D] px-4 py-2 text-white transition-all duration-200 hover:scale-105 hover:shadow-lg lg:block">
-        <Link
-          href={session.status === "unauthenticated" ? "/login" : "/logout"}
-        >
-          {session.status === "unauthenticated" ? "Register" : "Logout"}
+        <Link href={status === "unauthenticated" ? "/login" : "/logout"}>
+          {status === "unauthenticated" ? "Register" : "Logout"}
         </Link>
       </button>
       <HamburgerMenu navLinks={navLinks} path={path} />
