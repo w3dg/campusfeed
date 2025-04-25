@@ -55,9 +55,7 @@ export async function addEvent(formData) {
       },
     });
 
-    const result = await response.json();
-
-    if (result.errors) {
+    if (response.errors) {
       console.error("GraphQL Errors:", result.errors);
       return {
         success: false,
@@ -75,7 +73,7 @@ export async function addEvent(formData) {
     return {
       success: true,
       message: "Event submitted successfully",
-      data: result.data.createEvent,
+      data: response.data.createEventModel,
     };
   } catch (error) {
     console.error("Error submitting event:", error);
