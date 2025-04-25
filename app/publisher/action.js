@@ -3,8 +3,9 @@ import { EventSchema } from "../../lib/schema";
 
 export async function addEvent(formData) {
   const eventData = EventSchema.safeParse(formData);
+
   const GRAPHQL_ENDPOINT = process.env.NEXT_HYGRAPH_ENDPOINT;
-  const GRAPHQL_API_TOKEN = process.env.HYGRAPH_API_TOKEN;
+  const GRAPHQL_API_TOKEN = process.env.NEXT_HYGRAPH_API_TOKEN;
 
   if (!eventData.success) {
     console.log("error", eventData.error.errors);
@@ -16,8 +17,8 @@ export async function addEvent(formData) {
 
   try {
     const mutation = `
-      mutation CreateEvent($data: EventCreateInput!) {
-        createEvent(data: $data) {
+      mutation CreateEventModel($data: EventModelCreateInput!) {
+        createEventModel(data: $data) {
           id
           title
         }
@@ -27,15 +28,19 @@ export async function addEvent(formData) {
     const variables = {
       data: {
         title: eventData.data.title,
-        school: eventData.data.school,
         venue: eventData.data.venue,
-        startDate: eventData.data.startDate,
-        endDate: eventData.data.endDate,
-        socialLinks: eventData.data.socialLinks,
-        registrationLinks: eventData.data.registrationLinks,
+        start: new Date(eventData.data.startDate).toISOString(), // Convert to ISO8601
+        end: new Date(eventData.data.endDate).toISOString(),
+        socialMedia: eventData.data.socialLinks,
+        registrationLink: eventData.data.registrationLinks,
         guideLinePdfLink: eventData.data.guideLinePdfLink,
-        image: eventData.data.image,
+        posterImage: eventData.data.image,
         description: eventData.data.description,
+        emailId: eventData.data.email,
+        contactNumber: parseInt(eventData.data.phone),
+        eventPrize: 1000.0,
+        organizingSchoolOrSociety: eventData.data.school,
+        relationToUser: eventData.data.position,
       },
     };
 
