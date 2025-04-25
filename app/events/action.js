@@ -47,6 +47,15 @@ export async function getEvents() {
         })
         .replace(",", "")
         .replaceAll(" ", "-"),
+      eventEndDate: new Date(record.end)
+        .toLocaleString("en-GB", {
+          weekday: "short",
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        })
+        .replace(",", "")
+        .replaceAll(" ", "-"),
       eventPrize: parseFloat(record.eventPrize),
 
       eventDescription: record.description.html,
