@@ -185,7 +185,7 @@ const PublisherPage = () => {
               />
               <Input
                 {...register("phone")}
-                type="text"
+                type="number"
                 name="phone"
                 label="Phone Number"
                 variant="bordered"
@@ -281,6 +281,16 @@ const PublisherPage = () => {
               />
             </div>
             <div className="mb-4 grid w-full grid-cols-1 gap-8 lg:grid-cols-1">
+              <Input
+                {...register("prizeAmount")}
+                type="number"
+                name="prizeAmount"
+                label="Prize Amount"
+                variant="bordered"
+                isRequired
+                isInvalid={!!errors.prizeAmount}
+                errorMessage="Enter the prize amount for the winners"
+              />
               <Input
                 {...register("registrationLinks")}
                 type="text"

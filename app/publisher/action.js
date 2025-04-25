@@ -1,4 +1,5 @@
 "use server";
+import { graphQLclient } from "@/lib/graphql";
 import { EventSchema } from "../../lib/schema";
 
 export async function addEvent(formData) {
@@ -38,19 +39,20 @@ export async function addEvent(formData) {
         description: eventData.data.description,
         emailId: eventData.data.email,
         contactNumber: parseInt(eventData.data.phone),
-        eventPrize: 1000.0,
+        eventPrize: eventData.data.prizeAmount,
         organizingSchoolOrSociety: eventData.data.school,
         relationToUser: eventData.data.position,
       },
     };
 
-    const response = await fetch(GRAPHQL_ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${GRAPHQL_API_TOKEN}`,
+    const response = await graphQLclient.mutate({
+      mutation,
+      variables,
+      context: {
+        headers: {
+          Authorization: `Bearer ${GRAPHQL_API_TOKEN}`,
+        },
       },
-      body: JSON.stringify({ query: mutation, variables }),
     });
 
     const result = await response.json();
