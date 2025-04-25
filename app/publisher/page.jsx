@@ -18,15 +18,13 @@ import {
 import { formatISO } from "date-fns";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { useRef } from "react";
+import { redirect } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast, Toaster } from "sonner";
 import { EventSchema } from "../../lib/schema";
-import { addEvent } from "./action";
 
-const PublisherForm = () => {
+const detailsForm = () => {
   const formRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const {
@@ -41,8 +39,8 @@ const PublisherForm = () => {
   const onSubmit = async (data) => {
     console.log("submitted", data);
     setIsSubmitting(true);
-    const result = await addEvent(data);
-    console.log(result);
+    // const result = await addEvent(data);
+    // console.log(result);
 
     if (result.success) {
       formRef.current.reset();
@@ -54,63 +52,84 @@ const PublisherForm = () => {
     }
   };
 
-  const ControlledDatePicker = ({ name: formInputName, label }) => {
-    return (
-      <Controller
-        name={formInputName}
-        control={control}
-        rules={{ required: "Date is required" }}
-        render={({ field }) => {
-          return (
-            <DatePicker
-              variant="bordered"
-              hideTimeZone
-              granularity="day"
-              isInvalid={
-                !!(label === "Start Date" ? errors.startDate : errors.endDate)
-              }
-              errorMessage={`Pick a valid ${label}`}
-              label={label}
-              minValue={today(getLocalTimeZone())}
-              // render with ZonedDateTime
-              value={
-                field.value
-                  ? parseAbsoluteToLocal(new Date(field.value).toISOString())
-                  : null
-              }
-              // on change, convert to iso 8601 format yyyy-mm-dd for form value
-              onChange={(date) => {
-                if (!date) {
-                  field.onChange(null);
-                  return;
-                }
-                const nativeDate = date.toDate(); // Native Javascript Date
-                // set actual form value to iso 8601 format yyyy-mm-dd
-                const formattedString = formatISO(nativeDate, {
-                  representation: "date",
-                });
-                field.onChange(formattedString);
-              }}
-            />
-          );
-        }}
-      />
-    );
+  return {
+    handleSubmit,
+    formRef,
+    register,
+    control,
+    errors,
+    isSubmitting,
+    onSubmit,
   };
+};
 
-  return { handleChange, handleSubmit };
+const ControlledDatePicker = ({
+  name: formInputName,
+  label,
+  control,
+  errors,
+}) => {
+  return (
+    <Controller
+      name={formInputName}
+      control={control}
+      rules={{ required: "Date is required" }}
+      render={({ field }) => {
+        return (
+          <DatePicker
+            variant="bordered"
+            hideTimeZone
+            granularity="day"
+            isInvalid={
+              !!(label === "Start Date" ? errors.startDate : errors.endDate)
+            }
+            errorMessage={`Pick a valid ${label}`}
+            label={label}
+            minValue={today(getLocalTimeZone())}
+            // render with ZonedDateTime
+            value={
+              field.value
+                ? parseAbsoluteToLocal(new Date(field.value).toISOString())
+                : null
+            }
+            // on change, convert to iso 8601 format yyyy-mm-dd for form value
+            onChange={(date) => {
+              if (!date) {
+                field.onChange(null);
+                return;
+              }
+              const nativeDate = date.toDate(); // Native Javascript Date
+              // set actual form value to iso 8601 format yyyy-mm-dd
+              const formattedString = formatISO(nativeDate, {
+                representation: "date",
+              });
+              field.onChange(formattedString);
+            }}
+          />
+        );
+      }}
+    />
+  );
 };
 
 const PublisherPage = () => {
-  const { handleChange, handleSubmit } = detailsForm();
+  const {
+    handleSubmit,
+    formRef,
+    register,
+    control,
+    errors,
+    isSubmitting,
+    onSubmit,
+  } = detailsForm();
   const { data: session, status } = useSession();
-  const router = useRouter();
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/login");
+      redirect("/login");
     }
-  }, [status, router]);
+  }, [status]);
+
   return (
     <>
       <Toaster richColors position="top-center" />
@@ -119,7 +138,7 @@ const PublisherPage = () => {
         className="min-h-screen w-full bg-gradient-to-br from-[#e8f5e9] via-[#e3f2fd] to-[#f3e5f5] px-2 py-10"
       >
         <Card className="mx-auto w-full max-w-4xl items-center justify-center rounded-2xl bg-[#fcfdfd] p-6 shadow-2xl backdrop-blur-sm">
-          <Form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
+          <Form ref={formRef} onSubmit={() => handleSubmit(onSubmit)}>
             <CardHeader className="items-center space-x-2 divide-x-2 divide-[#6DA27D]">
               <Image
                 src="navlogo.svg"
@@ -222,8 +241,18 @@ const PublisherPage = () => {
 
               {/* DateInput isnt compatible with register, we wrap it in our own controlled input */}
 
-              <ControlledDatePicker name={"startDate"} label={"Start Date"} />
-              <ControlledDatePicker name={"endDate"} label={"End Date"} />
+              <ControlledDatePicker
+                errors={errors}
+                control={control}
+                name={"startDate"}
+                label={"Start Date"}
+              />
+              <ControlledDatePicker
+                errors={errors}
+                control={control}
+                name={"endDate"}
+                label={"End Date"}
+              />
 
               <Input
                 {...register("socialLinks", {
@@ -326,15 +355,5 @@ const PublisherPage = () => {
     </>
   );
 };
-
-// const PublisherPage = () => {
-//   const session = useSession();
-
-//   // if (session.status === "unauthenticated") {
-//   //   redirect("/login");
-//   // }
-
-//   return <PublisherForm />;
-// };
 
 export default PublisherPage;
