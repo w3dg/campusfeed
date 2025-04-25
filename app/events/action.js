@@ -31,6 +31,9 @@ export async function getEvents() {
     data: { eventModels },
   } = await graphQLclient.query({
     query: GET_EVENTS,
+    headers: {
+      Authorization: `Bearer ${process.env.HYGRAPH_API_TOKEN}`,
+    },
   });
 
   const events = eventModels.map((record) => {
