@@ -32,6 +32,7 @@ export async function addEvent(formData) {
         startDate: eventData.data.startDate,
         endDate: eventData.data.endDate,
         socialLinks: eventData.data.socialLinks,
+        prizeAmount: eventData.data.prizeAmount,
         registrationLinks: eventData.data.registrationLinks,
         guideLinePdfLink: eventData.data.guideLinePdfLink,
         image: eventData.data.image,
