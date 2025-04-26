@@ -1,12 +1,11 @@
 "use server";
 import { graphQLclient } from "@/lib/graphql";
 import { EventSchema } from "../../lib/schema";
+import { gql } from "@apollo/client";
+import { headers } from "next/headers";
 
 export async function addEvent(formData) {
   const eventData = EventSchema.safeParse(formData);
-
-  const GRAPHQL_ENDPOINT = process.env.NEXT_HYGRAPH_ENDPOINT;
-  const GRAPHQL_API_TOKEN = process.env.NEXT_HYGRAPH_API_TOKEN;
 
   if (!eventData.success) {
     console.log("error", eventData.error.errors);
@@ -17,51 +16,69 @@ export async function addEvent(formData) {
   }
 
   try {
-    const mutation = `
+    const CREATE_EVENT = gql`
       mutation CreateEventModel($data: EventModelCreateInput!) {
         createEventModel(data: $data) {
-          id
           title
+          eventPrize
+          description
+          posterImage
+          start
+          end
+          venue
+          organizingSchoolOrSociety
+          socialMedia
+          contactNumber
+          emailId
+          registrationLink
+          guideLinePdfLink
+          relationToUser
         }
       }
     `;
 
-    const variables = {
-      data: {
-        title: eventData.data.title,
-        venue: eventData.data.venue,
-        start: new Date(eventData.data.startDate).toISOString(), // Convert to ISO8601
-        end: new Date(eventData.data.endDate).toISOString(),
-        socialMedia: eventData.data.socialLinks,
-        registrationLink: eventData.data.registrationLinks,
-        guideLinePdfLink: eventData.data.guideLinePdfLink,
-        posterImage: eventData.data.image,
-        description: eventData.data.description,
-        emailId: eventData.data.email,
-        contactNumber: parseInt(eventData.data.phone),
-        eventPrize: eventData.data.prizeAmount,
-        organizingSchoolOrSociety: eventData.data.school,
-        relationToUser: eventData.data.position,
-      },
-    };
+    // const variables = {
+    //   data: {
+    //     title: eventData.data.title,
+    //     eventPrize: parseFloat(eventData.data.prizeAmount),
+    //     description: eventData.data.description,
+    //     posterImage: eventData.data.image,
+    //     start: new Date(eventData.data.startDate).toISOString(), // Convert to ISO8601
+    //     end: new Date(eventData.data.endDate).toISOString(),
+    //     venue: eventData.data.venue,
+    //     organizingSchoolOrSociety: eventData.data.school,
+    //     socialMedia: eventData.data.socialLinks,
+    //     contactNumber: parseInt(eventData.data.phone),
+    //     emailId: eventData.data.email,
+    //     registrationLink: eventData.data.registrationLinks,
+    //     guideLinePdfLink: eventData.data.guideLinePdfLink,
+    //     relationToUser: eventData.data.position,
+    //   },
+    // };
 
-    const response = await graphQLclient.mutate({
-      mutation,
-      variables,
-      context: {
-        headers: {
-          Authorization: `Bearer ${GRAPHQL_API_TOKEN}`,
+    // console.log("Variables:", variables);
+
+    await graphQLclient.mutate({
+      mutation: CREATE_EVENT,
+      variables: {
+        data: {
+          title: eventData.data.title,
+          eventPrize: parseFloat(eventData.data.prizeAmount),
+          description: eventData.data.description,
+          posterImage: eventData.data.image,
+          start: new Date(eventData.data.startDate).toISOString(), // Convert to ISO8601
+          end: new Date(eventData.data.endDate).toISOString(),
+          venue: eventData.data.venue,
+          organizingSchoolOrSociety: eventData.data.school,
+          socialMedia: eventData.data.socialLinks,
+          contactNumber: parseInt(eventData.data.phone),
+          emailId: eventData.data.email,
+          registrationLink: eventData.data.registrationLinks,
+          guideLinePdfLink: eventData.data.guideLinePdfLink,
+          relationToUser: eventData.data.position,
         },
       },
     });
-
-    if (response.errors) {
-      console.error("GraphQL Errors:", result.errors);
-      return {
-        success: false,
-        message: "Failed to submit event",
-      };
-    }
 
     // telegram verification message
 
@@ -73,7 +90,6 @@ export async function addEvent(formData) {
     return {
       success: true,
       message: "Event submitted successfully",
-      data: response.data.createEventModel,
     };
   } catch (error) {
     console.error("Error submitting event:", error);

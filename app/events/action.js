@@ -8,9 +8,7 @@ const GET_EVENTS = gql`
     eventModels {
       title
       eventPrize
-      description {
-        html
-      }
+      description
       posterImage
       start
       end
@@ -31,9 +29,6 @@ export async function getEvents() {
     data: { eventModels },
   } = await graphQLclient.query({
     query: GET_EVENTS,
-    headers: {
-      Authorization: `Bearer ${process.env.HYGRAPH_API_TOKEN}`,
-    },
   });
 
   const events = eventModels.map((record) => {
