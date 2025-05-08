@@ -2,7 +2,6 @@
 import { graphQLclient } from "@/lib/graphql";
 import { EventSchema } from "../../lib/schema";
 import { gql } from "@apollo/client";
-import { headers } from "next/headers";
 
 export async function addEvent(formData) {
   const eventData = EventSchema.safeParse(formData);
@@ -17,66 +16,62 @@ export async function addEvent(formData) {
 
   try {
     const CREATE_EVENT = gql`
-      mutation CreateEventModel($data: EventModelCreateInput!) {
-        createEventModel(data: $data) {
-          title
-          eventPrize
-          description
-          posterImage
-          start
-          end
-          venue
-          organizingSchoolOrSociety
-          socialMedia
-          contactNumber
-          emailId
-          registrationLink
-          guideLinePdfLink
-          relationToUser
+      mutation CreateEventModel(
+        $title: String!
+        $eventPrize: Float!
+        $description: String!
+        $posterImage: String!
+        $start: String!
+        $end: String!
+        $venue: String!
+        $organizingSchoolOrSociety: String!
+        $socialMedia: String
+        $contactNumber: Int!
+        $emailId: String!
+        $registrationLink: String
+        $guideLinePdfLink: String
+        $relationToUser: String!
+      ) {
+        createEventModel(
+          data: {
+            title: $title
+            eventPrize: $eventPrize
+            description: $description
+            posterImage: $posterImage
+            venue: $venue
+            start: $start
+            end: $end
+            organizingSchoolOrSociety: $organizingSchoolOrSociety
+            socialMedia: $socialMedia
+            contactNumber: $contactNumber
+            emailId: $emailId
+            registrationLink: $registrationLink
+            guideLinePdfLink: $guideLinePdfLink
+            relationToUser: $relationToUser
+          }
+        ) {
+          id
         }
       }
     `;
 
-    // const variables = {
-    //   data: {
-    //     title: eventData.data.title,
-    //     eventPrize: parseFloat(eventData.data.prizeAmount),
-    //     description: eventData.data.description,
-    //     posterImage: eventData.data.image,
-    //     start: new Date(eventData.data.startDate).toISOString(), // Convert to ISO8601
-    //     end: new Date(eventData.data.endDate).toISOString(),
-    //     venue: eventData.data.venue,
-    //     organizingSchoolOrSociety: eventData.data.school,
-    //     socialMedia: eventData.data.socialLinks,
-    //     contactNumber: parseInt(eventData.data.phone),
-    //     emailId: eventData.data.email,
-    //     registrationLink: eventData.data.registrationLinks,
-    //     guideLinePdfLink: eventData.data.guideLinePdfLink,
-    //     relationToUser: eventData.data.position,
-    //   },
-    // };
-
-    // console.log("Variables:", variables);
-
     await graphQLclient.mutate({
       mutation: CREATE_EVENT,
       variables: {
-        data: {
-          title: eventData.data.title,
-          eventPrize: parseFloat(eventData.data.prizeAmount),
-          description: eventData.data.description,
-          posterImage: eventData.data.image,
-          start: new Date(eventData.data.startDate).toISOString(), // Convert to ISO8601
-          end: new Date(eventData.data.endDate).toISOString(),
-          venue: eventData.data.venue,
-          organizingSchoolOrSociety: eventData.data.school,
-          socialMedia: eventData.data.socialLinks,
-          contactNumber: parseInt(eventData.data.phone),
-          emailId: eventData.data.email,
-          registrationLink: eventData.data.registrationLinks,
-          guideLinePdfLink: eventData.data.guideLinePdfLink,
-          relationToUser: eventData.data.position,
-        },
+        title: eventData.data.title,
+        eventPrize: parseFloat(eventData.data.prizeAmount),
+        description: eventData.data.description,
+        posterImage: eventData.data.image,
+        start: new Date(eventData.data.startDate).toISOString(),
+        end: new Date(eventData.data.endDate).toISOString(),
+        venue: eventData.data.venue,
+        organizingSchoolOrSociety: eventData.data.school,
+        socialMedia: eventData.data.socialLinks,
+        contactNumber: parseInt(eventData.data.phone),
+        emailId: eventData.data.email,
+        registrationLink: eventData.data.registrationLinks,
+        guideLinePdfLink: eventData.data.guideLinePdfLink,
+        relationToUser: eventData.data.position,
       },
     });
 
